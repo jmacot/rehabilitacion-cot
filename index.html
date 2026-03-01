@@ -192,14 +192,14 @@
 
     /* ── SELECT PROTOCOLO ── */
     select#protocoloSelect {
-      background: #d6e4f0; color: #1a3a5c; font-weight: 600;
-      cursor: pointer; border-radius: 8px; border-color: #b8cfdf;
-      transition: background 0.2s, box-shadow 0.2s; padding: 8px 32px 8px 12px;
-      font-size: 13px;
+      background: var(--sel-bg, #d6e4f0); color: var(--sel-fg, #1a3a5c); font-weight: 600;
+      cursor: pointer; border-radius: 8px; border-color: var(--sel-border, #b8cfdf);
+      transition: background 0.2s, box-shadow 0.2s, color 0.2s, border-color 0.2s;
+      padding: 8px 32px 8px 12px; font-size: 13px;
     }
-    select#protocoloSelect:hover { background: #c5d9ec; box-shadow: var(--shadow); }
+    select#protocoloSelect:hover { filter: brightness(0.95); box-shadow: var(--shadow); }
     [data-theme="dark"] select#protocoloSelect {
-      background: var(--accent-light); color: var(--accent); border-color: var(--border);
+      background: var(--sel-dark-bg, var(--accent-light)); color: var(--sel-dark-fg, var(--accent)); border-color: var(--border);
     }
     /* Search input compact */
     #buscarProtocolo { padding: 8px 12px; font-size: 13px; }
@@ -487,7 +487,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
       Protocolos de Rehabilitacion
     </h1>
-    <p class="subtitle">Guias postquirurgicas para pacientes &middot; COT</p>
+    <p class="subtitle">Guias de ayuda postquirurgicas &middot; COT</p>
   </div>
 
   <!-- REGION PILLS -->
@@ -504,9 +504,9 @@
       </div>
     </div>
     <div class="form-group" style="margin-top:6px">
-      <label>Protocolo</label>
+      <label>Intervencion</label>
       <select id="protocoloSelect">
-        <option value="">-- Seleccione protocolo --</option>
+        <option value="">-- Seleccione intervencion --</option>
       </select>
     </div>
   </div>
@@ -545,7 +545,7 @@
   <!-- EMPTY STATE -->
   <div class="empty-state" id="emptyState">
     <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
-    <p>Seleccione una region y un protocolo<br>para ver las fases de rehabilitacion</p>
+    <p>Seleccione una region y una intervencion<br>para ver las fases de rehabilitacion</p>
   </div>
 
   <div class="app-footer"><span>COT &mdash; Protocolos de Rehabilitacion v1.0</span></div>
@@ -6502,12 +6502,34 @@ function renderRegionPills() {
 }
 
 // ─────────────────────────────────────────────
+//  SELECT COLOR POR REGION
+// ─────────────────────────────────────────────
+function applySelectColor() {
+  const sel = document.getElementById('protocoloSelect');
+  const reg = REGIONES.find(r => r.id === activeRegion);
+  if (!reg || activeRegion === 'todas') {
+    sel.style.removeProperty('--sel-fg');
+    sel.style.removeProperty('--sel-bg');
+    sel.style.removeProperty('--sel-border');
+    sel.style.removeProperty('--sel-dark-fg');
+    sel.style.removeProperty('--sel-dark-bg');
+  } else {
+    const c = d3.color(reg.fg);
+    sel.style.setProperty('--sel-fg', reg.fg);
+    sel.style.setProperty('--sel-bg', reg.bg);
+    sel.style.setProperty('--sel-border', `rgba(${c.r},${c.g},${c.b},0.35)`);
+    sel.style.setProperty('--sel-dark-fg', reg.darkFg);
+    sel.style.setProperty('--sel-dark-bg', reg.darkBg);
+  }
+}
+
+// ─────────────────────────────────────────────
 //  RENDER: PROTOCOL SELECT
 // ─────────────────────────────────────────────
 function renderProtocolSelect(filter) {
   const sel = document.getElementById('protocoloSelect');
   const currentVal = sel.value;
-  sel.innerHTML = '<option value="">-- Seleccione protocolo --</option>';
+  sel.innerHTML = '<option value="">-- Seleccione intervencion --</option>';
   let protocols = PROTOCOLOS;
   if (activeRegion !== 'todas') {
     protocols = protocols.filter(p => p.region === activeRegion);
@@ -6550,6 +6572,7 @@ function renderProtocolSelect(filter) {
     if (exists) sel.value = currentVal;
     else { sel.value = ''; resetResults(); }
   }
+  applySelectColor();
 }
 
 // ─────────────────────────────────────────────
