@@ -7,3 +7,24 @@ Desktop.ini
 .vscode/
 .idea/
 *.log
+.claude/
+
+# Scripts de extraccion/limpieza (desarrollo)
+extracted_*.js
+clean_*.js
+all_new_protocols.js
+missing_protocols.js
+matched_links.json
+proto_links.json
+youtube_links.json
+youtube_links.txt
+
+# Directorios de protocolos originales (datos fuente)
+Acondicionamiento deportivo/
+Cabeza, cuello, columna/
+Cadera/
+Codo/
+Hombro/
+Muñeca y mano/
+Pie y tobillo/
+Rodilla/
