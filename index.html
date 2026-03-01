@@ -4657,6 +4657,1776 @@ const PROTOCOLOS = [
       }
     ]
   },
+  // ── RODILLA: LCA NO OPERATIVO ──
+  {
+    id: 'rodilla_lca_no_op',
+    nombre: 'Rehabilitacion de LCA No Operatoria (Conservador)',
+    region: 'rodilla',
+    totalWeeks: 24,
+    phases: [
+      {
+        name: 'Fase I: Aguda / Proteccion',
+        weekStart: 0,
+        weekEnd: 2,
+        goals: [
+          'Reducir dolor e inflamacion',
+          'Restaurar rango de movimiento de extension completa',
+          'Restaurar movilidad patelar',
+          'Restablecer activacion de cuadriceps y control neuromuscular',
+          'Educacion: uso de hielo, elevacion, actividad modificada'
+        ],
+        precautions: [
+          'Evitar actividades de pivoteo, corte o torsion',
+          'Usar ortesis funcional segun indicacion medica'
+        ],
+        weightBearing: 'Carga segun tolerancia con muletas. Progresar a carga completa cuando la marcha sea normal y sin dolor',
+        interventions: {
+          dolor: [
+            'Hielo, compresion, elevacion',
+            'Bombeos de tobillo'
+          ],
+          rom: [
+            'Movilizaciones patelares: superior/inferior y medial/lateral',
+            'Flexo-extension de rodilla asistida y deslizamientos de talon',
+            'Colgamiento en prono y apoyo de talon para restaurar extension',
+            'Estiramiento de gastrocnemio y estiramiento de soleo',
+            'Estiramiento pasivo de isquiotibiales'
+          ],
+          fuerza: [
+            'Elevaciones de talon',
+            'Quad sets con estimulacion electrica si activacion deficiente',
+            'Elevacion de pierna recta (suspender si retraso de extension)',
+            'Abduccion de cadera en decubito lateral'
+          ],
+          equilibrio: [],
+          cardio: [],
+          neuromuscular: []
+        },
+        criteria: [
+          'Extension de rodilla 0 grados',
+          'Flexion de rodilla >=90 grados',
+          'Elevacion de pierna recta sin retraso de extension',
+          'Inflamacion controlada'
+        ]
+      },
+      {
+        name: 'Fase II: Intermedia',
+        weekStart: 3,
+        weekEnd: 6,
+        goals: [
+          'Restaurar flexion completa igualando lado contralateral',
+          'Normalizar patron de marcha sin ayudas externas',
+          'Progresar fortalecimiento de cuadriceps e isquiotibiales',
+          'Iniciar entrenamiento propioceptivo'
+        ],
+        precautions: [
+          'Evitar actividades de pivoteo y corte',
+          'Usar ortesis funcional para actividades deportivas'
+        ],
+        weightBearing: 'Carga completa. Marcha sin muletas cuando patron normal',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Bicicleta estatica',
+            'Estiramiento de cuadriceps en prono y estiramiento de cuadriceps en bipedestacion',
+            'Estiramiento de flexores de cadera en rodillas'
+          ],
+          fuerza: [
+            'Curl de isquiotibiales en bipedestacion y prono',
+            'Subidas al escalon y subidas al escalon con marcha',
+            'Sentadillas con pelota, deslizamientos en pared, mini sentadillas (0-60 grados)',
+            'Prensa de piernas',
+            'Puente y puente unilateral, clamshell, hip hike'
+          ],
+          equilibrio: [
+            'Equilibrio monopodal estatico progresando a dinamico',
+            'Pasos laterales sobre obstaculos'
+          ],
+          cardio: [],
+          neuromuscular: []
+        },
+        criteria: [
+          'Rango de movimiento flexion a <10 grados del lado contralateral',
+          'Extension igual al lado contralateral',
+          'Marcha normal sin muletas',
+          'Inflamacion 1+ o menos'
+        ]
+      },
+      {
+        name: 'Fase III: Fortalecimiento Avanzado',
+        weekStart: 7,
+        weekEnd: 12,
+        goals: [
+          'Mantener rango de movimiento completo',
+          'Progresar fortalecimiento de forma segura',
+          'Mejorar control neuromuscular y propiocepcion',
+          'Evitar dolor e inflamacion post-ejercicio'
+        ],
+        precautions: [
+          'Continuar evitando pivoteo y corte',
+          'Usar ortesis funcional para actividad fisica'
+        ],
+        weightBearing: 'Carga completa',
+        interventions: {
+          dolor: [],
+          rom: [],
+          fuerza: [
+            'Sentadillas parciales progresando profundidad',
+            'Zancadas frontales y zancadas laterales',
+            'Peso muerto rumano',
+            'Progresion a una pierna: prensa a una pierna, subidas al escalon laterales, sentadillas a una pierna, deslizamientos de pierna en pared',
+            'Extension de rodilla sentado (90-45 grados, evitar dolor anterior)'
+          ],
+          equilibrio: [
+            'Progresar equilibrio monopodal con perturbacion',
+            'Entrenamiento en superficies inestables'
+          ],
+          cardio: [
+            'Eliptica, escaladora, natacion con patada de aleteo, jogging en piscina'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Sin derrame ni dolor post-ejercicio',
+          'Rango de movimiento igual al lado contralateral',
+          'Indice de cuadriceps >80%',
+          'Sentadilla monopodal con buena forma a >60 grados'
+        ]
+      },
+      {
+        name: 'Fase IV: Retorno a Actividad / Deporte',
+        weekStart: 13,
+        weekEnd: 24,
+        goals: [
+          'Progresar a actividades deportivas especificas de forma segura',
+          'Fortalecer confianza funcional en la rodilla',
+          'Completar programa de retorno a carrera',
+          'Establecer programa de mantenimiento a largo plazo'
+        ],
+        precautions: [
+          'Usar ortesis funcional para deportes de contacto o pivoteo',
+          'Modificar actividad deportiva si episodios de inestabilidad recurren'
+        ],
+        weightBearing: 'Sin restricciones',
+        interventions: {
+          dolor: [],
+          rom: [],
+          fuerza: [
+            'Programa de pliometricos bilaterales progresando a unilaterales',
+            'Programa de agilidad progresivo (escalera, conos)',
+            'Entrenamiento deportivo especifico'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Programa de retorno a carrera por intervalos'
+          ],
+          neuromuscular: [
+            'Ejercicios de corte y cambio de direccion progresivos',
+            'Entrenamiento reactivo con tareas duales'
+          ]
+        },
+        criteria: [
+          'Indice de cuadriceps e isquiotibiales >=90%',
+          'Test de salto (Hop Testing) >=90% comparado con lado contralateral',
+          'Sin episodios de inestabilidad',
+          'KOOS-actividad deportiva >80%',
+          'Completar programa de retorno a carrera sin dolor/derrame'
+        ]
+      }
+    ]
+  },
+  // ── RODILLA: TENDON ROTULIANO ──
+  {
+    id: 'rodilla_tendon_rotuliano',
+    nombre: 'Reparacion del Tendon Rotuliano',
+    region: 'rodilla',
+    totalWeeks: 36,
+    phases: [
+      {
+        name: 'Fase I: Proteccion Maxima',
+        weekStart: 0,
+        weekEnd: 2,
+        goals: [
+          'Proteger la reparacion del tendon',
+          'Reducir dolor e inflamacion',
+          'Mantener movilidad patelar',
+          'Iniciar activacion de cuadriceps de forma segura'
+        ],
+        precautions: [
+          'Ortesis bloqueada en extension completa para caminar y dormir',
+          'Sin extension activa de rodilla contra gravedad',
+          'Sin carga de peso en flexion de rodilla',
+          'Limitar flexion pasiva segun indicacion del cirujano (generalmente 30 grados semana 1, 60 grados semana 2)'
+        ],
+        weightBearing: 'Carga de contacto (toe-touch) con muletas y ortesis bloqueada en extension. Sin carga activa sobre el mecanismo extensor',
+        interventions: {
+          dolor: [
+            'Hielo, compresion, elevacion',
+            'Bombeos de tobillo para circulacion'
+          ],
+          rom: [
+            'Flexion pasiva asistida por terapeuta segun limites del cirujano',
+            'Deslizamientos de talon suaves dentro de limites permitidos',
+            'Movilizaciones patelares suaves',
+            'Colgamiento en prono y apoyo de talon para mantener extension'
+          ],
+          fuerza: [
+            'Quad sets suaves con estimulacion electrica neuromuscular',
+            'Elevacion de pierna recta con ortesis (si tolerado)',
+            'Abduccion de cadera en decubito lateral',
+            'Gluteal sets'
+          ],
+          equilibrio: [],
+          cardio: [],
+          neuromuscular: []
+        },
+        criteria: [
+          'Dolor controlado',
+          'Extension pasiva completa',
+          'Flexion pasiva segun limites del cirujano',
+          'Capaz de realizar contraccion de cuadriceps'
+        ]
+      },
+      {
+        name: 'Fase II: Proteccion Moderada',
+        weekStart: 3,
+        weekEnd: 6,
+        goals: [
+          'Progresar flexion de rodilla gradualmente (meta: 90 grados a semana 6)',
+          'Progresar carga de peso',
+          'Normalizar patron de marcha con ortesis',
+          'Mejorar activacion de cuadriceps'
+        ],
+        precautions: [
+          'Progresion gradual de flexion: 60-70 grados semana 3-4, 80-90 grados semana 5-6',
+          'Continuar con ortesis para marcha',
+          'Sin extension resistida contra gravedad hasta semana 6'
+        ],
+        weightBearing: 'Carga parcial progresiva con muletas y ortesis. Progresar a 50% peso corporal semana 3-4 y 75% semana 5-6',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Deslizamientos de talon con progresion gradual de flexion',
+            'Bicicleta estatica sin resistencia cuando flexion permita (>90 grados)'
+          ],
+          fuerza: [
+            'Quad sets progresivos',
+            'Elevacion de pierna recta sin ortesis',
+            'Mini sentadillas parciales en cadena cerrada (0-30 grados)',
+            'Curl de isquiotibiales suave',
+            'Prensa de piernas rango limitado (0-45 grados) al final de la fase'
+          ],
+          equilibrio: [],
+          cardio: [],
+          neuromuscular: []
+        },
+        criteria: [
+          'Flexion de rodilla >=90 grados',
+          'Extension completa activa',
+          'Carga parcial progresiva sin dolor',
+          'Buena activacion de cuadriceps'
+        ]
+      },
+      {
+        name: 'Fase III: Fortalecimiento Temprano',
+        weekStart: 7,
+        weekEnd: 12,
+        goals: [
+          'Restaurar rango de movimiento completo de flexion',
+          'Normalizar marcha sin ortesis',
+          'Progresar fortalecimiento de cuadriceps e isquiotibiales',
+          'Iniciar entrenamiento propioceptivo'
+        ],
+        precautions: [
+          'Retirar ortesis para marcha cuando patron sea normal y control de cuadriceps adecuado',
+          'Evitar dolor anterior de rodilla con ejercicios resistidos'
+        ],
+        weightBearing: 'Carga completa. Retirar muletas cuando marcha normal. Retirar ortesis segun indicacion medica',
+        interventions: {
+          dolor: [],
+          rom: [],
+          fuerza: [
+            'Prensa de piernas con rango progresivo (0-60, luego 0-90 grados)',
+            'Curl de isquiotibiales en maquina',
+            'Maquina de abductores y aductores de cadera',
+            'Maquina de extension de cadera',
+            'Silla romana',
+            'Sentadilla a silla con enfasis en control excentrico',
+            'Zancadas laterales suaves'
+          ],
+          equilibrio: [
+            'Equilibrio monopodal estatico progresando a dinamico',
+            'Entrenamiento en superficie inestable'
+          ],
+          cardio: [
+            'Bicicleta estatica con resistencia progresiva',
+            'Natacion (patada suave), eliptica'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Flexion de rodilla igualando lado contralateral',
+          'Marcha normal sin ortesis ni muletas',
+          'Elevacion de pierna recta sin retraso de extension',
+          'Sin dolor con actividades diarias'
+        ]
+      },
+      {
+        name: 'Fase IV: Fortalecimiento Avanzado',
+        weekStart: 13,
+        weekEnd: 20,
+        goals: [
+          'Normalizar fuerza de cuadriceps e isquiotibiales',
+          'Progresar ejercicios en cadena cerrada a una pierna',
+          'Preparar para retorno a actividad deportiva'
+        ],
+        precautions: [
+          'Evitar dolor anterior de rodilla',
+          'Progresar carga gradualmente'
+        ],
+        weightBearing: 'Carga completa sin restricciones',
+        interventions: {
+          dolor: [],
+          rom: [],
+          fuerza: [
+            'Peso muerto rumano bilateral y unilateral',
+            'Prensa a una pierna',
+            'Subidas al escalon y bajadas del escalon',
+            'Sentadillas a una pierna con control excentrico',
+            'Extension de rodilla sentado (90-45 grados)',
+            'Fortalecimiento lumbopelvico avanzado'
+          ],
+          equilibrio: [
+            'Entrenamiento propioceptivo avanzado con perturbacion'
+          ],
+          cardio: [
+            'Iniciar programa de retorno a carrera (a partir de semana 16 con autorizacion medica)'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Indice de cuadriceps >80%',
+          'Indice de isquiotibiales >80%',
+          'Sin dolor con ejercicios avanzados',
+          'Completar carrera continua 20 minutos sin dolor'
+        ]
+      },
+      {
+        name: 'Fase V: Retorno al Deporte',
+        weekStart: 21,
+        weekEnd: 36,
+        goals: [
+          'Completar protocolo de retorno al deporte',
+          'Rendimiento simetrico bilateral',
+          'Retorno seguro a actividad deportiva completa'
+        ],
+        precautions: [
+          'Retorno gradual: practica sin contacto -> contacto limitado -> contacto completo'
+        ],
+        weightBearing: 'Sin restricciones',
+        interventions: {
+          dolor: [],
+          rom: [],
+          fuerza: [
+            'Pliometricos bilaterales progresando a unilaterales',
+            'Programa de agilidad deportiva especifica',
+            'Entrenamiento de potencia y velocidad'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Retorno a carrera a intensidad completa'
+          ],
+          neuromuscular: [
+            'Ejercicios de corte, pivoteo y cambio de direccion',
+            'Entrenamiento deportivo especifico a intensidad creciente',
+            'Practica deportiva progresiva'
+          ]
+        },
+        criteria: [
+          'Indice de cuadriceps e isquiotibiales >=90%',
+          'Test de salto >=90% comparado con lado contralateral',
+          'Sin dolor ni inflamacion con actividad deportiva',
+          'Autorizacion medica para retorno completo'
+        ]
+      }
+    ]
+  },
+  // ── RODILLA: MOSAICOPLASTIA ──
+  {
+    id: 'rodilla_mosaicoplastia',
+    nombre: 'Mosaicoplastia / Trasplante Osteocondral Autologo',
+    region: 'rodilla',
+    totalWeeks: 36,
+    phases: [
+      {
+        name: 'Fase I: Proteccion Maxima',
+        weekStart: 0,
+        weekEnd: 6,
+        goals: [
+          'Proteger el injerto osteocondral',
+          'Reducir inflamacion y dolor',
+          'Restaurar extension completa de rodilla',
+          'Mantener activacion de cuadriceps',
+          'Restaurar movilidad patelar'
+        ],
+        precautions: [
+          'Carga restringida: apoyo de contacto (toe-touch) con muletas durante 6 semanas',
+          'Flexion pasiva limitada segun indicacion del cirujano y localizacion del injerto',
+          'Sin extension activa resistida contra gravedad',
+          'Lesiones en condilo femoral: flexion libre, carga restringida',
+          'Lesiones en patela/troclea: flexion limitada, carga libre'
+        ],
+        weightBearing: 'Apoyo de contacto (toe-touch) con muletas. Sin carga sobre el injerto. Ortesis bloqueada en extension para marcha',
+        interventions: {
+          dolor: [
+            'Hielo, compresion, elevacion',
+            'Estimulacion electrica neuromuscular para control de dolor'
+          ],
+          rom: [
+            'Movilizaciones patelares suaves',
+            'Flexion pasiva asistida segun limites del cirujano',
+            'Maquina de movimiento pasivo continuo (CPM) si prescrita',
+            'Extension pasiva: colgamiento en prono'
+          ],
+          fuerza: [
+            'Quad sets con estimulacion electrica',
+            'Elevacion de pierna recta con ortesis',
+            'Abduccion de cadera',
+            'Gluteal sets',
+            'Puente bilateral con columna neutra'
+          ],
+          equilibrio: [],
+          cardio: [],
+          neuromuscular: []
+        },
+        criteria: [
+          'Extension pasiva completa',
+          'Flexion pasiva segun objetivo del cirujano',
+          'Elevacion de pierna recta sin retraso de extension',
+          'Inflamacion controlada'
+        ]
+      },
+      {
+        name: 'Fase II: Progresion de Carga',
+        weekStart: 7,
+        weekEnd: 12,
+        goals: [
+          'Progresar carga de peso gradualmente hasta carga completa',
+          'Restaurar flexion completa',
+          'Normalizar patron de marcha',
+          'Progresar fortalecimiento de cuadriceps e isquiotibiales'
+        ],
+        precautions: [
+          'Progresion de carga: 25% por semana aproximadamente',
+          'Evitar actividades de impacto',
+          'Retirar ortesis cuando control de cuadriceps sea adecuado'
+        ],
+        weightBearing: 'Carga parcial progresiva: 25% semana 7, 50% semana 8, 75% semana 9, completa semana 10-12',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Bicicleta estatica sin/con resistencia minima',
+            'Estiramientos de cuadriceps, isquiotibiales, gemelos'
+          ],
+          fuerza: [
+            'Mini sentadillas (0-45 grados)',
+            'Prensa de piernas rango limitado',
+            'Curl de isquiotibiales',
+            'Clamshell y hip hike',
+            'Puente unilateral'
+          ],
+          equilibrio: [
+            'Equilibrio monopodal estatico',
+            'Transferencias de peso'
+          ],
+          cardio: [
+            'Bicicleta estatica',
+            'Natacion (patada suave)'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Carga completa sin dolor',
+          'Marcha normal sin muletas',
+          'Flexion >=120 grados',
+          'Sin derrame significativo'
+        ]
+      },
+      {
+        name: 'Fase III: Fortalecimiento Progresivo',
+        weekStart: 13,
+        weekEnd: 24,
+        goals: [
+          'Mantener rango de movimiento completo',
+          'Normalizar fuerza de cuadriceps e isquiotibiales',
+          'Mejorar propiocepcion y control neuromuscular',
+          'Progresar ejercicios funcionales'
+        ],
+        precautions: [
+          'Evitar actividades de impacto hasta semana 16-20',
+          'Progresar ejercicios sin provocar derrame ni dolor'
+        ],
+        weightBearing: 'Carga completa',
+        interventions: {
+          dolor: [],
+          rom: [],
+          fuerza: [
+            'Sentadilla a silla con control excentrico',
+            'Zancadas laterales y frontales',
+            'Peso muerto rumano bilateral y unilateral',
+            'Prensa a una pierna',
+            'Subidas al escalon y bajadas del escalon',
+            'Sentadillas a una pierna progresivas',
+            'Deslizamientos de pierna en pared'
+          ],
+          equilibrio: [
+            'Equilibrio monopodal dinamico con perturbacion',
+            'Pasos laterales con banda elastica'
+          ],
+          cardio: [
+            'Eliptica, escaladora',
+            'Iniciar programa de retorno a carrera (semana 16-20 con autorizacion medica)'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Indice de cuadriceps >80%',
+          'Sin dolor ni derrame con actividades funcionales',
+          'Buena mecanica de sentadilla monopodal'
+        ]
+      },
+      {
+        name: 'Fase IV: Retorno a Actividad',
+        weekStart: 25,
+        weekEnd: 36,
+        goals: [
+          'Completar retorno a actividades deportivas de forma segura',
+          'Rendimiento simetrico bilateral',
+          'Programa de mantenimiento a largo plazo'
+        ],
+        precautions: [
+          'Retorno gradual a actividades de impacto',
+          'Considerar modificacion deportiva a largo plazo segun localizacion del injerto'
+        ],
+        weightBearing: 'Sin restricciones',
+        interventions: {
+          dolor: [],
+          rom: [],
+          fuerza: [
+            'Pliometricos bilaterales progresando a unilaterales',
+            'Programa de agilidad (escalera, conos, cambio de direccion)',
+            'Entrenamiento deportivo especifico'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Carrera a intensidad completa'
+          ],
+          neuromuscular: [
+            'Ejercicios de corte y pivoteo progresivos',
+            'Entrenamiento reactivo deportivo especifico'
+          ]
+        },
+        criteria: [
+          'Indice de cuadriceps e isquiotibiales >=90%',
+          'Test de salto >=90% comparado con lado contralateral',
+          'Sin dolor ni derrame con actividad deportiva completa',
+          'Autorizacion medica para retorno al deporte'
+        ]
+      }
+    ]
+  },
+  // ── HOMBRO: ARTROPLASTIA TOTAL ──
+  {
+    id: 'hombro_artroplastia',
+    nombre: 'Artroplastia Total de Hombro (Anatomica)',
+    region: 'hombro',
+    totalWeeks: 24,
+    phases: [
+      {
+        name: 'Fase I: Proteccion Maxima',
+        weekStart: 0,
+        weekEnd: 4,
+        goals: [
+          'Proteger la protesis y los tejidos reparados',
+          'Reducir dolor e inflamacion',
+          'Iniciar movilidad pasiva dentro de limites del cirujano',
+          'Mantener rango de movimiento de codo, mano y muneca',
+          'Prevenir rigidez de hombro'
+        ],
+        precautions: [
+          'Cabestrillo continuo excepto para ejercicios y aseo (4-6 semanas)',
+          'Sin movimiento activo de hombro',
+          'Sin carga de peso con el brazo operado',
+          'Limites de rango pasivo: flexion 120 grados, abduccion 90 grados, rotacion externa 30 grados',
+          'Sin rotacion interna detras de la espalda',
+          'Si reparacion de subescapular: sin rotacion interna activa 6 semanas'
+        ],
+        weightBearing: 'Sin carga de peso con brazo operado. Cabestrillo para inmovilizacion',
+        interventions: {
+          dolor: [
+            'Hielo, crioterapia',
+            'Pendulares suaves (tipo Codman)',
+            'Movilizacion activa de codo, mano y muneca'
+          ],
+          rom: [
+            'Flexion activo-asistida de hombro con baston o poleas en supino (dentro de limites)',
+            'Flexion de hombro con baston',
+            'Estiramiento de rotacion externa con baston (hasta 30 grados)',
+            'Deslizamientos en mesa inclinada',
+            'Poleas para flexion asistida'
+          ],
+          fuerza: [
+            'Retraccion escapular suave',
+            'Presion de toalla (isometricos suaves de rotadores)',
+            'Activacion escapular'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Caminar diariamente'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Dolor controlado (EVA <4)',
+          'Flexion pasiva >=120 grados',
+          'Rotacion externa pasiva 30 grados',
+          'Movimiento activo de codo/mano/muneca completo'
+        ]
+      },
+      {
+        name: 'Fase II: Movilidad Activo-Asistida y Activa',
+        weekStart: 5,
+        weekEnd: 8,
+        goals: [
+          'Retirar cabestrillo gradualmente',
+          'Progresar a movimiento activo-asistido y activo de hombro',
+          'Restaurar rango de movimiento funcional',
+          'Iniciar fortalecimiento isometrico suave'
+        ],
+        precautions: [
+          'Sin levantar objetos >1 kg con brazo operado',
+          'Progresion gradual de movimiento activo',
+          'Si reparacion de subescapular: iniciar rotacion interna activa suave'
+        ],
+        weightBearing: 'Sin cabestrillo. Sin carga de peso significativa con brazo operado',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Poleas y baston para flexion y rotacion',
+            'Rodar pelota en pared',
+            'Deslizamientos en mesa inclinada con progresion',
+            'Sleeper stretch suave para rotacion interna (si tolerado)'
+          ],
+          fuerza: [
+            'Salutes (flexion activa asistida/activa)',
+            'Punch en supino (serrato anterior)',
+            'Isometricos de rotacion externa e isometricos de rotacion interna submaximos',
+            'Remo bajo suave',
+            'Retraccion escapular en prono',
+            'Curl de biceps con banda ligera'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Bicicleta estatica'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Flexion activa-asistida >=140 grados',
+          'Rotacion externa activa-asistida >=45 grados',
+          'Capaz de levantar brazo activamente contra gravedad',
+          'Sin dolor significativo con ejercicios'
+        ]
+      },
+      {
+        name: 'Fase III: Fortalecimiento Temprano',
+        weekStart: 9,
+        weekEnd: 14,
+        goals: [
+          'Restaurar rango de movimiento activo completo',
+          'Progresar fortalecimiento isotonica de manguito rotador y estabilizadores escapulares',
+          'Mejorar control neuromuscular del hombro',
+          'Retornar a actividades de la vida diaria'
+        ],
+        precautions: [
+          'Sin levantar objetos >2-3 kg con brazo operado',
+          'Evitar dolor con ejercicios resistidos'
+        ],
+        weightBearing: 'Carga ligera progresiva con brazo operado para actividades diarias',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Estiramientos: sleeper stretch, serie en marco de puerta',
+            'Scaption sentado'
+          ],
+          fuerza: [
+            'Rotacion externa en decubito lateral con mancuerna',
+            'Rotacion externa en bipedestacion con banda',
+            'Rotacion interna en bipedestacion con banda',
+            'Extension de hombro con banda',
+            'Remo sobre fitball',
+            'Punches de serrato',
+            'Robbery',
+            'Push-up plus de rodillas',
+            'Curl de biceps'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Eliptica sin brazos, caminar, bicicleta'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Rango de movimiento activo funcional (flexion >150 grados, rotacion externa >50 grados)',
+          'Fuerza de rotacion externa 4/5',
+          'Sin dolor con actividades de la vida diaria'
+        ]
+      },
+      {
+        name: 'Fase IV: Fortalecimiento Avanzado',
+        weekStart: 15,
+        weekEnd: 24,
+        goals: [
+          'Normalizar fuerza del hombro',
+          'Retornar a actividades recreativas',
+          'Establecer programa de mantenimiento a largo plazo'
+        ],
+        precautions: [
+          'Evitar deportes de contacto o impacto sobre el hombro',
+          'Limitar levantamiento de peso a recomendacion del cirujano'
+        ],
+        weightBearing: 'Carga progresiva segun tolerancia',
+        interventions: {
+          dolor: [],
+          rom: [],
+          fuerza: [
+            'Abrazo dinamico',
+            'Bird-dog',
+            'Deslizamientos en pared con banda',
+            'Rotacion externa a 90 grados de abduccion',
+            'Rotacion interna a 90 grados de abduccion',
+            'Push-up plus extendido',
+            'Flexiones de pared progresando a inclinadas',
+            'Punch frontal con banda',
+            'Programa de fortalecimiento global con pesas ligeras'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Actividad cardiovascular sin restriccion'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Rango de movimiento activo completo y funcional',
+          'Fuerza de rotacion externa e interna >=4+/5',
+          'Sin dolor con actividades recreativas',
+          'Satisfaccion funcional del paciente'
+        ]
+      }
+    ]
+  },
+  // ── HOMBRO: PROTESIS INVERSA ──
+  {
+    id: 'hombro_protesis_inversa',
+    nombre: 'Protesis Inversa de Hombro',
+    region: 'hombro',
+    totalWeeks: 24,
+    phases: [
+      {
+        name: 'Fase I: Proteccion Maxima',
+        weekStart: 0,
+        weekEnd: 6,
+        goals: [
+          'Proteger la protesis y tejidos reparados',
+          'Reducir dolor e inflamacion',
+          'Prevenir luxacion (evitar aduccion y rotacion interna combinadas)',
+          'Iniciar movilidad pasiva suave dentro de limites del cirujano',
+          'Mantener movilidad de codo, mano y muneca'
+        ],
+        precautions: [
+          'Cabestrillo con almohadilla abductora 6 semanas',
+          'Sin aduccion pasada la linea media (riesgo de luxacion)',
+          'Sin rotacion interna detras de la espalda',
+          'Sin extension de hombro pasada la linea del cuerpo',
+          'Sin movimiento activo de hombro',
+          'Dormir semi-incorporado o con almohada bajo el brazo'
+        ],
+        weightBearing: 'Sin carga de peso con brazo operado. Cabestrillo con almohadilla abductora continuo',
+        interventions: {
+          dolor: [
+            'Hielo, crioterapia',
+            'Pendulares suaves tipo Codman (movimientos pequenos)',
+            'Movilizacion activa de codo, mano, muneca y dedos'
+          ],
+          rom: [
+            'Flexion activo-asistida de hombro con baston en supino (hasta 90-100 grados)',
+            'Flexion de hombro con baston',
+            'Elevacion de hombro con baston en plano escapular',
+            'Rotacion externa pasiva hasta neutro (0 grados) con baston'
+          ],
+          fuerza: [
+            'Retraccion escapular suave',
+            'Activacion escapular',
+            'Presion de toalla (isometricos submaximos)'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Caminar diariamente'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Dolor controlado',
+          'Flexion pasiva >=90 grados',
+          'Rotacion externa pasiva a neutro',
+          'Sin signos de inestabilidad protesica'
+        ]
+      },
+      {
+        name: 'Fase II: Movilidad Activo-Asistida',
+        weekStart: 7,
+        weekEnd: 10,
+        goals: [
+          'Retirar cabestrillo gradualmente',
+          'Progresar a movimiento activo-asistido de hombro',
+          'Mejorar flexion y rotacion externa',
+          'Iniciar fortalecimiento isometrico del deltoide'
+        ],
+        precautions: [
+          'Continuar evitando aduccion y rotacion interna combinadas',
+          'Sin levantar objetos >0.5 kg',
+          'Progresar movimiento activo gradualmente'
+        ],
+        weightBearing: 'Sin cabestrillo progresivamente. Sin carga de peso significativa',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Poleas para flexion asistida',
+            'Deslizamientos en mesa inclinada',
+            'Rodar pelota en pared',
+            'Progresar flexion pasiva hasta 120-140 grados'
+          ],
+          fuerza: [
+            'Salutes (flexion activa asistida)',
+            'Punch en supino (activacion de serrato anterior)',
+            'Remo bajo isometrico suave',
+            'Isometricos de rotacion submaximos',
+            'Scaption sentado con peso minimo'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Bicicleta estatica'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Flexion activa-asistida >=120 grados',
+          'Rotacion externa activa-asistida >=30 grados',
+          'Capaz de levantar brazo con asistencia minima',
+          'Sin dolor significativo'
+        ]
+      },
+      {
+        name: 'Fase III: Fortalecimiento Temprano',
+        weekStart: 11,
+        weekEnd: 16,
+        goals: [
+          'Progresar a movimiento activo completo',
+          'Iniciar fortalecimiento isotonico suave del deltoide y estabilizadores escapulares',
+          'Retornar a actividades basicas de la vida diaria',
+          'Mejorar resistencia muscular'
+        ],
+        precautions: [
+          'Sin levantamiento de objetos >2 kg',
+          'Evitar movimientos bruscos',
+          'Continuar evitando aduccion forzada y rotacion interna extrema'
+        ],
+        weightBearing: 'Carga ligera con brazo operado para actividades diarias',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Estiramientos suaves de capsula si rigidez'
+          ],
+          fuerza: [
+            'Rotacion externa en decubito lateral con peso ligero',
+            'Remo sobre fitball',
+            'Punches de serrato',
+            'Extension de hombro con banda ligera',
+            'Remo sentado con banda',
+            'Robbery suave',
+            'Lawnmowers suave',
+            'Push-up plus de rodillas'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Eliptica, caminar, bicicleta'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Flexion activa >=130 grados',
+          'Capaz de realizar actividades de la vida diaria con brazo operado',
+          'Fuerza de deltoide >=3+/5'
+        ]
+      },
+      {
+        name: 'Fase IV: Fortalecimiento Avanzado y Mantenimiento',
+        weekStart: 17,
+        weekEnd: 24,
+        goals: [
+          'Maximizar fuerza y funcion del hombro',
+          'Retornar a actividades recreativas de bajo impacto',
+          'Establecer programa de ejercicios de mantenimiento a largo plazo'
+        ],
+        precautions: [
+          'Evitar deportes de contacto o impacto',
+          'Evitar levantamiento de peso por encima de la cabeza con carga significativa',
+          'Restricciones permanentes segun indicacion del cirujano'
+        ],
+        weightBearing: 'Carga progresiva segun tolerancia y recomendacion del cirujano',
+        interventions: {
+          dolor: [],
+          rom: [],
+          fuerza: [
+            'Bird-dog',
+            'Field goals',
+            'Abrazo dinamico y abrazo dinamico con banda',
+            'Punch frontal con banda y punch frontal',
+            'Extension de hombro en prono',
+            'Isometricos de rotacion avanzados',
+            'Rotacion externa en decubito lateral con progresion',
+            'Rotacion interna en bipedestacion con banda',
+            'Deslizamientos en pared con banda',
+            'Programa global de mantenimiento'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Actividad cardiovascular sin restriccion'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Flexion activa funcional (objetivo >120 grados, variable segun paciente)',
+          'Fuerza de deltoide >=4/5',
+          'Satisfaccion funcional: capaz de realizar actividades diarias y recreativas',
+          'Sin dolor con programa de ejercicios de mantenimiento'
+        ]
+      }
+    ]
+  },
+  // ── HOMBRO: MANGUITO ROTADOR GRANDE NO OPERATORIO ──
+  {
+    id: 'hombro_manguito_grande_no_op',
+    nombre: 'Rotura Grande/Masiva del Manguito Rotador (Conservador)',
+    region: 'hombro',
+    totalWeeks: 16,
+    phases: [
+      {
+        name: 'Fase I: Control de Sintomas',
+        weekStart: 0,
+        weekEnd: 4,
+        goals: [
+          'Reducir dolor e inflamacion',
+          'Mantener rango de movimiento disponible',
+          'Educar al paciente sobre manejo de sintomas y modificacion de actividad',
+          'Preservar movilidad escapulotoracia y glenohumeral'
+        ],
+        precautions: [
+          'Evitar movimientos que reproduzcan dolor',
+          'Sin actividades por encima de la cabeza si provocan dolor',
+          'Usar cabestrillo solo si dolor severo para periodos cortos'
+        ],
+        weightBearing: 'Sin restricciones de carga general. Evitar levantar objetos pesados con brazo afectado',
+        interventions: {
+          dolor: [
+            'Hielo, calor segun preferencia del paciente',
+            'Modalidades analgesicas si disponibles',
+            'Educacion: posicionamiento, higiene postural, modificacion de actividad'
+          ],
+          rom: [
+            'Deslizamiento horizontal en mesa para flexion asistida',
+            'Flexion activo-asistida de hombro con baston en supino',
+            'Flexion de hombro con baston',
+            'Elevacion lateral a 90 grados (si tolerada)',
+            'Rodar pelota en pared',
+            'Sleeper stretch para rotacion interna (si tolerado)',
+            'Serie en marco de puerta para estiramientos capsulares'
+          ],
+          fuerza: [
+            'Retraccion escapular',
+            'Activacion escapular',
+            'Presion de toalla (isometricos de rotadores submaximos)',
+            'Isometricos de rotacion en rango indoloro'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Caminar, bicicleta estatica'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Dolor controlado (EVA <4 con actividad)',
+          'Rango de movimiento pasivo funcional preservado',
+          'Capaz de realizar ejercicios sin dolor significativo'
+        ]
+      },
+      {
+        name: 'Fase II: Fortalecimiento de Estabilizadores',
+        weekStart: 5,
+        weekEnd: 8,
+        goals: [
+          'Mejorar fuerza de estabilizadores escapulares',
+          'Fortalecer musculatura compensatoria (deltoide, trapecio)',
+          'Mejorar control neuromuscular del hombro',
+          'Progresar actividades funcionales'
+        ],
+        precautions: [
+          'Trabajar en rangos indoloros',
+          'Evitar movimientos que produzcan impingement'
+        ],
+        weightBearing: 'Sin restricciones generales',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Continuar estiramientos de fase anterior'
+          ],
+          fuerza: [
+            'Remo bajo con banda o mancuerna',
+            'Rotacion externa en decubito lateral con peso ligero',
+            'Rotacion externa en bipedestacion con banda',
+            'Remo sobre fitball',
+            'Extension de hombro sobre fitball',
+            'Salutes para flexion activa',
+            'Punch en supino para serrato anterior',
+            'Punches de serrato de pie',
+            'Lawnmowers',
+            'Robbery'
+          ],
+          equilibrio: [],
+          cardio: [],
+          neuromuscular: []
+        },
+        criteria: [
+          'Capaz de elevar brazo contra gravedad sin dolor significativo',
+          'Fuerza de rotacion externa >=3+/5',
+          'Mejoria en funcion diaria'
+        ]
+      },
+      {
+        name: 'Fase III: Fortalecimiento Avanzado',
+        weekStart: 9,
+        weekEnd: 12,
+        goals: [
+          'Progresar fortalecimiento de forma segura',
+          'Mejorar funcion por encima de la cabeza si posible',
+          'Optimizar mecanica escapular',
+          'Maximizar capacidad funcional'
+        ],
+        precautions: [
+          'Trabajar dentro de limites de dolor',
+          'Adaptar ejercicios a capacidad del paciente'
+        ],
+        weightBearing: 'Sin restricciones',
+        interventions: {
+          dolor: [],
+          rom: [],
+          fuerza: [
+            'Push-up plus de rodillas progresando a push-up plus extendido',
+            'Punch frontal y punch frontal con banda',
+            'Bird-dog',
+            'Abrazo dinamico y abrazo dinamico con banda',
+            'Field goals',
+            'Deslizamientos en pared con banda',
+            'Rotacion interna a 90 grados (si tolerada)',
+            'Programa de fortalecimiento global progresivo'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Actividad cardiovascular completa'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Funcion del hombro mejorada respecto a inicio',
+          'Capaz de realizar actividades diarias sin dolor significativo',
+          'Fuerza de rotacion externa >=4/5'
+        ]
+      },
+      {
+        name: 'Fase IV: Mantenimiento Funcional',
+        weekStart: 13,
+        weekEnd: 16,
+        goals: [
+          'Establecer programa de ejercicios de mantenimiento independiente',
+          'Maximizar nivel funcional alcanzable',
+          'Educacion sobre manejo a largo plazo y senales de alarma'
+        ],
+        precautions: [
+          'Programa de mantenimiento permanente para preservar ganancia funcional',
+          'Consultar medico si deterioro funcional o aumento de dolor'
+        ],
+        weightBearing: 'Sin restricciones',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Estiramientos de mantenimiento 3 veces por semana'
+          ],
+          fuerza: [
+            'Programa de fortalecimiento de mantenimiento 3 veces por semana',
+            'Enfasis en estabilizadores escapulares y rotadores',
+            'Programa domiciliario independiente'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Actividad cardiovascular regular'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Programa domiciliario independiente establecido',
+          'Nivel funcional maximo alcanzado',
+          'Paciente satisfecho con resultado funcional o candidato a cirugia'
+        ]
+      }
+    ]
+  },
+  // ── HOMBRO: REPARACION DE PECTORAL MAYOR ──
+  {
+    id: 'hombro_pectoral',
+    nombre: 'Reparacion del Tendon del Pectoral Mayor',
+    region: 'hombro',
+    totalWeeks: 24,
+    phases: [
+      {
+        name: 'Fase I: Proteccion Maxima',
+        weekStart: 0,
+        weekEnd: 6,
+        goals: [
+          'Proteger la reparacion del tendon',
+          'Reducir dolor e inflamacion',
+          'Mantener rango de movimiento de codo, mano y muneca',
+          'Prevenir atrofia muscular proximal'
+        ],
+        precautions: [
+          'Cabestrillo con brazo en aduccion y rotacion interna 6 semanas',
+          'Sin movimiento activo de hombro',
+          'Sin abduccion ni rotacion externa',
+          'Sin extension de hombro pasada la linea del cuerpo',
+          'Sin levantar objetos con brazo operado'
+        ],
+        weightBearing: 'Sin carga de peso con brazo operado. Cabestrillo continuo',
+        interventions: {
+          dolor: [
+            'Hielo, crioterapia',
+            'Movilizacion activa de codo, mano, muneca y dedos',
+            'Pendulares minimos (solo flexion suave)'
+          ],
+          rom: [
+            'Flexion pasiva de hombro hasta 90 grados (sin abduccion ni rotacion externa)',
+            'Elevacion en plano escapular asistida hasta 90 grados'
+          ],
+          fuerza: [
+            'Retraccion escapular suave',
+            'Retraccion escapular en prono',
+            'Activacion escapular',
+            'Remo bajo isometrico suave'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Caminar, bicicleta estatica (sin brazos)'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Dolor controlado',
+          'Herida quirurgica curada',
+          'Rango de movimiento pasivo de flexion >=90 grados',
+          'Sin signos de complicacion'
+        ]
+      },
+      {
+        name: 'Fase II: Movilidad Progresiva',
+        weekStart: 7,
+        weekEnd: 10,
+        goals: [
+          'Retirar cabestrillo',
+          'Progresar rango de movimiento pasivo y activo-asistido',
+          'Iniciar abduccion y rotacion externa pasiva gradual',
+          'Iniciar fortalecimiento isometrico suave (excepto pectoral)'
+        ],
+        precautions: [
+          'Sin contraccion activa de pectoral mayor',
+          'Progresar rotacion externa y abduccion gradualmente',
+          'Sin extension de hombro resistida'
+        ],
+        weightBearing: 'Sin cabestrillo. Sin carga de peso significativa con brazo operado',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Flexion pasiva y activo-asistida progresiva (meta: completa)',
+            'Rotacion externa pasiva gradual (10 grados por semana)',
+            'Abduccion pasiva gradual',
+            'Estiramientos suaves de capsula posterior (sleeper stretch suave)'
+          ],
+          fuerza: [
+            'Retraccion escapular con resistencia ligera',
+            'Isometricos de rotadores (sin pectoral activo)',
+            'Elevacion activa de brazo en plano escapular',
+            'Remo bajo con banda ligera'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Bicicleta estatica, eliptica sin brazos'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Flexion activa-asistida >=140 grados',
+          'Rotacion externa pasiva >=45 grados',
+          'Sin dolor con movimiento pasivo'
+        ]
+      },
+      {
+        name: 'Fase III: Fortalecimiento Temprano',
+        weekStart: 11,
+        weekEnd: 16,
+        goals: [
+          'Restaurar rango de movimiento activo completo',
+          'Iniciar fortalecimiento isotonico suave de pectoral (semana 12+)',
+          'Fortalecer estabilizadores escapulares y manguito rotador',
+          'Retornar a actividades de la vida diaria'
+        ],
+        precautions: [
+          'Iniciar contraccion suave de pectoral a semana 12 con resistencia minima',
+          'Sin actividades de empuje pesado (bench press, push-ups completas)',
+          'Progresar resistencia gradualmente'
+        ],
+        weightBearing: 'Carga ligera progresiva con brazo operado',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Estiramientos de pectoral suaves (esquina de pared, marco de puerta) a partir semana 14'
+          ],
+          fuerza: [
+            'Rotacion externa en decubito lateral',
+            'Rotacion interna y externa con banda en bipedestacion',
+            'Remo sobre fitball',
+            'Punches de serrato',
+            'Isometricos de pectoral progresando a isotonico suave (semana 12+)',
+            'Push-up de pared suave (semana 14+)',
+            'Programa de fortalecimiento escapular avanzado'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Eliptica con brazos suave, natacion (no mariposa ni pecho)'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Rango de movimiento activo completo',
+          'Contraccion de pectoral sin dolor',
+          'Fuerza de rotadores >=4/5'
+        ]
+      },
+      {
+        name: 'Fase IV: Fortalecimiento Avanzado y Retorno',
+        weekStart: 17,
+        weekEnd: 24,
+        goals: [
+          'Restaurar fuerza de pectoral mayor',
+          'Progresar a ejercicios de empuje y actividades deportivas',
+          'Retornar a actividad deportiva completa'
+        ],
+        precautions: [
+          'Sin bench press pesado antes de semana 20',
+          'Progresar carga gradualmente (no mas de 10% por semana)',
+          'Autorizacion medica para retorno a deportes de contacto'
+        ],
+        weightBearing: 'Carga progresiva sin restricciones especificas',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Estiramientos completos de pectoral'
+          ],
+          fuerza: [
+            'Push-ups progresivas (rodillas, luego completas)',
+            'Bench press con barra o mancuernas (peso progresivo)',
+            'Flexiones de cable (cable crossover)',
+            'Programa de pliometricos de miembro superior (semana 20+)',
+            'Entrenamiento deportivo especifico'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Actividad cardiovascular sin restriccion'
+          ],
+          neuromuscular: [
+            'Ejercicios pliometricos con balon medicinal',
+            'Entrenamiento reactivo de miembro superior'
+          ]
+        },
+        criteria: [
+          'Fuerza de pectoral mayor >=90% comparado con lado contralateral',
+          'Sin dolor con actividades de empuje a carga completa',
+          'Autorizacion medica para retorno al deporte',
+          'Test funcional de miembro superior satisfactorio'
+        ]
+      }
+    ]
+  },
+  // ── PIE: REPARACION DE TENDONES PERONEOS ──
+  {
+    id: 'pie_peroneos',
+    nombre: 'Reparacion de Tendones Peroneos',
+    region: 'pie',
+    totalWeeks: 20,
+    phases: [
+      {
+        name: 'Fase I: Proteccion e Inmovilizacion',
+        weekStart: 0,
+        weekEnd: 2,
+        goals: [
+          'Proteger la reparacion tendinosa',
+          'Reducir dolor e inflamacion',
+          'Mantener rango de movimiento de rodilla y cadera',
+          'Prevenir trombosis venosa profunda'
+        ],
+        precautions: [
+          'Bota walker o ferula posterior con tobillo en neutro o ligera eversion',
+          'Sin carga de peso',
+          'Sin movimiento activo de tobillo',
+          'Elevacion frecuente de la extremidad'
+        ],
+        weightBearing: 'Sin carga de peso. Muletas bilaterales. Bota walker o ferula posterior',
+        interventions: {
+          dolor: [
+            'Hielo, compresion, elevacion',
+            'Bombeos de tobillo suaves dentro de ferula si permitido'
+          ],
+          rom: [
+            'Movilidad activa de dedos del pie',
+            'Flexion/extension de rodilla',
+            'Ejercicios de cadera en decubito'
+          ],
+          fuerza: [
+            'Quad sets',
+            'Elevacion de pierna recta',
+            'Abduccion de cadera',
+            'Clamshell',
+            'Estiramiento pasivo de isquiotibiales'
+          ],
+          equilibrio: [],
+          cardio: [],
+          neuromuscular: []
+        },
+        criteria: [
+          'Dolor controlado',
+          'Herida quirurgica en buena evolucion',
+          'Inflamacion manejada con elevacion y hielo'
+        ]
+      },
+      {
+        name: 'Fase II: Proteccion con Movilidad Temprana',
+        weekStart: 3,
+        weekEnd: 6,
+        goals: [
+          'Iniciar rango de movimiento pasivo y activo-asistido de tobillo',
+          'Progresar carga de peso en bota walker',
+          'Prevenir rigidez articular',
+          'Mantener fuerza proximal'
+        ],
+        precautions: [
+          'Continuar con bota walker para marcha',
+          'Evitar inversion activa resistida (estres sobre reparacion)',
+          'Rango de movimiento: dorsiflexion/flexion plantar segun tolerancia, eversion suave'
+        ],
+        weightBearing: 'Carga parcial progresiva en bota walker: 25% semana 3, 50% semana 4, 75% semana 5-6',
+        interventions: {
+          dolor: [
+            'Hielo post-ejercicio',
+            'Masaje suave de cicatriz cuando herida curada'
+          ],
+          rom: [
+            'Dorsiflexion y flexion plantar pasiva y activa-asistida',
+            'Eversion activa suave (sin resistencia)',
+            'Movilizaciones articulares de tobillo suaves'
+          ],
+          fuerza: [
+            'Curl de isquiotibiales',
+            'Continuar fortalecimiento proximal de cadera y rodilla',
+            'Isometricos de tobillo en posicion neutra'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Bicicleta estatica (pierna no operada, brazo)'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Dorsiflexion pasiva >=5 grados',
+          'Eversion activa sin dolor',
+          'Carga parcial tolerada sin aumento de dolor'
+        ]
+      },
+      {
+        name: 'Fase III: Progresion de Carga y Fortalecimiento',
+        weekStart: 7,
+        weekEnd: 12,
+        goals: [
+          'Transicion de bota walker a calzado normal',
+          'Carga completa con marcha normal',
+          'Progresar fortalecimiento de peroneos y estabilizadores de tobillo',
+          'Iniciar entrenamiento propioceptivo'
+        ],
+        precautions: [
+          'Retirar bota walker segun tolerancia (semana 8-10)',
+          'Progresar fortalecimiento de eversion gradualmente',
+          'Evitar terrenos irregulares inicialmente'
+        ],
+        weightBearing: 'Carga completa. Transicion de bota a calzado con soporte semana 8-10',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Estiramientos de gastrocnemio y soleo',
+            'Estiramientos de cuadriceps en bipedestacion'
+          ],
+          fuerza: [
+            'Tobillo 4 direcciones con banda elastica (enfasis en eversion)',
+            'Elevaciones de talon bilaterales progresando a unilateral',
+            'Maquina de abductores y aductores de cadera',
+            'Maquina de extension de cadera',
+            'Silla romana',
+            'Curl de isquiotibiales en maquina',
+            'Bicicleta estatica con resistencia'
+          ],
+          equilibrio: [
+            'Equilibrio monopodal en superficie estable',
+            'Tabla de equilibrio/BAPS board'
+          ],
+          cardio: [
+            'Bicicleta estatica',
+            'Natacion (patada suave)'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Marcha normal sin bota ni muletas',
+          'Dorsiflexion activa simétrica',
+          'Eversion 4/5 fuerza sin dolor',
+          'Sin derrame significativo'
+        ]
+      },
+      {
+        name: 'Fase IV: Fortalecimiento Avanzado',
+        weekStart: 13,
+        weekEnd: 16,
+        goals: [
+          'Normalizar fuerza de peroneos y estabilizadores de tobillo',
+          'Progresar ejercicios funcionales y en una pierna',
+          'Preparar para retorno a carrera'
+        ],
+        precautions: [
+          'Evitar terrenos muy irregulares hasta semana 16',
+          'Progresar impacto gradualmente'
+        ],
+        weightBearing: 'Carga completa sin restricciones',
+        interventions: {
+          dolor: [],
+          rom: [],
+          fuerza: [
+            'Peso muerto rumano unilateral',
+            'Maquina de gemelos sentado',
+            'Hip hike',
+            'Zancadas frontales y zancadas laterales',
+            'Prensa a una pierna',
+            'Subidas al escalon y bajadas del escalon',
+            'Elevaciones de talon a una pierna progresivas'
+          ],
+          equilibrio: [
+            'Equilibrio monopodal en superficie inestable',
+            'Entrenamiento de perturbacion'
+          ],
+          cardio: [
+            'Iniciar programa de retorno a carrera (semana 14-16)'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Fuerza de eversion >=4+/5',
+          'Elevaciones de talon a una pierna x25 sin dolor',
+          'Equilibrio monopodal >=30 segundos ojos cerrados',
+          'Completar caminata 30 minutos sin dolor'
+        ]
+      },
+      {
+        name: 'Fase V: Retorno al Deporte',
+        weekStart: 17,
+        weekEnd: 20,
+        goals: [
+          'Completar programa de retorno a carrera',
+          'Retornar a actividad deportiva de forma segura',
+          'Establecer programa de prevencion de recidiva'
+        ],
+        precautions: [
+          'Retorno gradual: trote -> carrera -> sprints -> cambio de direccion',
+          'Usar ortesis de tobillo o tape para deportes si indicado'
+        ],
+        weightBearing: 'Sin restricciones',
+        interventions: {
+          dolor: [],
+          rom: [],
+          fuerza: [
+            'Pliometricos bilaterales progresando a unilaterales',
+            'Programa de agilidad (escalera, conos)',
+            'Entrenamiento deportivo especifico'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Carrera a intensidad completa',
+            'Entrenamiento de intervalos'
+          ],
+          neuromuscular: [
+            'Ejercicios de cambio de direccion y corte',
+            'Entrenamiento reactivo en superficies variables',
+            'Programa de prevencion de esguince de tobillo'
+          ]
+        },
+        criteria: [
+          'Completar programa de retorno a carrera sin dolor',
+          'Fuerza simetrica bilateral',
+          'Test funcionales >=90% comparado con lado contralateral',
+          'Autorizacion medica para retorno al deporte'
+        ]
+      }
+    ]
+  },
+  // ── PIE: PROTESIS TOTAL DE TOBILLO ──
+  {
+    id: 'pie_protesis_tobillo',
+    nombre: 'Protesis Total de Tobillo (Artroplastia)',
+    region: 'pie',
+    totalWeeks: 20,
+    phases: [
+      {
+        name: 'Fase I: Proteccion e Inmovilizacion',
+        weekStart: 0,
+        weekEnd: 2,
+        goals: [
+          'Proteger la protesis y tejidos quirurgicos',
+          'Reducir dolor e inflamacion',
+          'Mantener fuerza proximal',
+          'Prevenir trombosis venosa profunda'
+        ],
+        precautions: [
+          'Ferula posterior o bota walker segun indicacion del cirujano',
+          'Sin carga de peso sobre extremidad operada',
+          'Elevacion frecuente de la extremidad',
+          'Sin movimiento activo de tobillo'
+        ],
+        weightBearing: 'Sin carga de peso. Muletas bilaterales. Ferula o bota walker',
+        interventions: {
+          dolor: [
+            'Hielo, compresion, elevacion',
+            'Movilizacion activa de dedos del pie'
+          ],
+          rom: [
+            'Movilidad activa de rodilla y cadera'
+          ],
+          fuerza: [
+            'Elevacion de pierna recta',
+            'Abduccion de cadera',
+            'Clamshell',
+            'Curl de isquiotibiales isometrico',
+            'Estiramiento pasivo de isquiotibiales',
+            'Estiramiento de cuadriceps en bipedestacion (pierna no operada)'
+          ],
+          equilibrio: [],
+          cardio: [],
+          neuromuscular: []
+        },
+        criteria: [
+          'Dolor controlado',
+          'Herida en buena evolucion',
+          'Inflamacion manejada'
+        ]
+      },
+      {
+        name: 'Fase II: Movilidad Temprana',
+        weekStart: 3,
+        weekEnd: 6,
+        goals: [
+          'Iniciar rango de movimiento de tobillo suave',
+          'Progresar carga de peso en bota walker',
+          'Prevenir rigidez articular',
+          'Mantener acondicionamiento general'
+        ],
+        precautions: [
+          'Movimiento de tobillo dentro de limites tolerados sin forzar',
+          'Continuar bota walker para marcha',
+          'Progresion de carga segun indicacion medica'
+        ],
+        weightBearing: 'Carga parcial progresiva en bota walker: 25% semana 3-4, 50% semana 5, 75% semana 6',
+        interventions: {
+          dolor: [
+            'Hielo post-ejercicio',
+            'Masaje de cicatriz cuando herida curada',
+            'Estiramiento de flexores de cadera'
+          ],
+          rom: [
+            'Dorsiflexion y flexion plantar activa-asistida suave',
+            'Circunduccion de tobillo suave',
+            'Movilizaciones articulares suaves por terapeuta'
+          ],
+          fuerza: [
+            'Continuar fortalecimiento proximal',
+            'Isometricos de tobillo submaximos en posicion neutra',
+            'Curl de isquiotibiales con banda'
+          ],
+          equilibrio: [],
+          cardio: [
+            'Bicicleta estatica (pierna no operada, brazo)'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Dorsiflexion activa >=0 grados (neutro)',
+          'Flexion plantar activa >=20 grados',
+          'Carga parcial tolerada sin dolor'
+        ]
+      },
+      {
+        name: 'Fase III: Progresion de Carga y Fortalecimiento',
+        weekStart: 7,
+        weekEnd: 12,
+        goals: [
+          'Transicion de bota walker a calzado',
+          'Carga completa con patron de marcha normal',
+          'Progresar fortalecimiento de tobillo y pierna',
+          'Iniciar entrenamiento de equilibrio'
+        ],
+        precautions: [
+          'Retirar bota walker semana 8-10 segun indicacion medica',
+          'Uso de calzado con buen soporte',
+          'Evitar terrenos irregulares inicialmente',
+          'Sin actividades de impacto'
+        ],
+        weightBearing: 'Carga completa. Transicion a calzado con soporte semana 8-10',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Estiramientos de gastrocnemio y soleo',
+            'Movilizaciones articulares de tobillo'
+          ],
+          fuerza: [
+            'Elevaciones de talon bilaterales (inicio suave)',
+            'Tobillo 4 direcciones con banda elastica',
+            'Maquina de extension de cadera',
+            'Silla romana',
+            'Peso muerto rumano bilateral',
+            'Bicicleta estatica con resistencia progresiva'
+          ],
+          equilibrio: [
+            'Equilibrio monopodal en superficie estable',
+            'Transferencias de peso'
+          ],
+          cardio: [
+            'Bicicleta estatica',
+            'Natacion (patada suave)'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Marcha normal sin bota ni muletas',
+          'Dorsiflexion activa >=5 grados',
+          'Elevaciones de talon bilaterales x20 sin dolor',
+          'Sin derrame significativo'
+        ]
+      },
+      {
+        name: 'Fase IV: Fortalecimiento Avanzado',
+        weekStart: 13,
+        weekEnd: 16,
+        goals: [
+          'Normalizar fuerza de tobillo y pierna',
+          'Progresar ejercicios funcionales',
+          'Mejorar resistencia para caminatas prolongadas',
+          'Preparar para actividades recreativas'
+        ],
+        precautions: [
+          'Evitar actividades de alto impacto (correr, saltar) permanentemente o segun indicacion del cirujano',
+          'Progresar carga gradualmente'
+        ],
+        weightBearing: 'Carga completa sin restricciones',
+        interventions: {
+          dolor: [],
+          rom: [],
+          fuerza: [
+            'Elevaciones de talon unilaterales progresivas',
+            'Maquina de gemelos sentado',
+            'Hip hike',
+            'Zancadas frontales y zancadas laterales',
+            'Prensa a una pierna',
+            'Subidas al escalon',
+            'Sentadillas a una pierna parciales'
+          ],
+          equilibrio: [
+            'Equilibrio monopodal en superficie inestable',
+            'Tabla de equilibrio progresiva'
+          ],
+          cardio: [
+            'Caminatas progresivas en tiempo y distancia',
+            'Eliptica'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Elevaciones de talon unilaterales x15 sin dolor',
+          'Caminar 45 minutos sin dolor significativo',
+          'Fuerza de tobillo >=4/5 en todas las direcciones'
+        ]
+      },
+      {
+        name: 'Fase V: Retorno a Actividad y Mantenimiento',
+        weekStart: 17,
+        weekEnd: 20,
+        goals: [
+          'Retorno a actividades recreativas de bajo impacto',
+          'Maximizar nivel funcional',
+          'Establecer programa de mantenimiento a largo plazo',
+          'Educacion sobre proteccion articular permanente'
+        ],
+        precautions: [
+          'Evitar deportes de alto impacto (correr, saltar, deportes de contacto) de forma permanente',
+          'Usar calzado con buena amortiguacion',
+          'Actividades recomendadas: caminar, bicicleta, natacion, golf, senderismo suave'
+        ],
+        weightBearing: 'Sin restricciones para actividades de bajo impacto',
+        interventions: {
+          dolor: [],
+          rom: [
+            'Estiramientos de mantenimiento diarios'
+          ],
+          fuerza: [
+            'Programa de fortalecimiento de mantenimiento 3 veces por semana',
+            'Enfasis en fuerza de pantorrilla y estabilizadores de tobillo',
+            'Programa domiciliario independiente'
+          ],
+          equilibrio: [
+            'Entrenamiento propioceptivo continuo'
+          ],
+          cardio: [
+            'Actividades de bajo impacto regulares: caminar, bicicleta, natacion'
+          ],
+          neuromuscular: []
+        },
+        criteria: [
+          'Programa domiciliario independiente establecido',
+          'Capaz de realizar actividades recreativas de bajo impacto sin dolor',
+          'Satisfaccion funcional del paciente',
+          'Seguimiento medico periodico establecido'
+        ]
+      }
+    ]
+  },
 ];
 
 

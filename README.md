@@ -1,12 +1,12 @@
 # Protocolos de Rehabilitacion
 
-Guias de rehabilitacion postquirurgica por fase y semana, basadas en los protocolos del MGH Sports Medicine. Selecciona patologia y fecha de cirugia para ver las recomendaciones de la fase actual.
+Guias de rehabilitacion postquirurgica por fase y semana. Selecciona patologia y fecha de cirugia para ver las recomendaciones de la fase actual.
 
 ## Acceso directo
 [Abrir la aplicacion](https://jmacot.github.io/rehabilitacion-cot/)
 
 ## Funcionalidades
-- 18 protocolos organizados por region anatomica (rodilla, hombro, cadera, pie/tobillo, codo, columna)
+- 27 protocolos organizados por region anatomica (rodilla, hombro, cadera, pie/tobillo, codo, columna)
 - Calculo automatico de fase segun fecha de cirugia o semanas postoperatorias
 - Timeline visual con indicador de fase actual
 - Contenido clinico: objetivos, precauciones, carga de peso, intervenciones por categoria, criterios de progresion
@@ -18,10 +18,10 @@ Guias de rehabilitacion postquirurgica por fase y semana, basadas en los protoco
 ## Protocolos incluidos
 | Region | Protocolos |
 |--------|-----------|
-| Rodilla | LCA, Meniscectomia, Sutura Meniscal, PTR, LPFM, Microfractura, Osteotomia Tibial Alta |
-| Hombro | Bankart Anterior, Manguito Rotador (peq-med), Manguito Rotador (grande-masivo), SLAP II, Latarjet |
+| Rodilla | LCA, LCA No Operatorio, Meniscectomia, Sutura Meniscal, PTR, MPFL, Microfractura, Osteotomia Tibial Alta, Tendon Rotuliano, Mosaicoplastia |
+| Hombro | Bankart Anterior, Manguito Rotador (peq-med), Manguito Rotador (grande-masivo), Manguito Rotador Grande (conservador), SLAP II, Latarjet, Artroplastia Total, Protesis Inversa, Pectoral Mayor |
 | Cadera | Protesis Total, Reparacion Labral |
-| Pie/Tobillo | Tendon de Aquiles, Fractura Tobillo RAFI |
+| Pie/Tobillo | Tendon de Aquiles, Fractura Tobillo RAFI, Tendones Peroneos, Protesis Total de Tobillo |
 | Codo | Epicondilitis Medial/Lateral |
 | Columna | Lumbalgia con Deficit de Movilidad |
 
