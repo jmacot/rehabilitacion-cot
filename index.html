@@ -468,8 +468,11 @@
       .form-row { flex-direction: column; gap: 10px; }
       .form-group { width: 100%; }
       .form-group input, .form-group select { width: 100% !important; }
-      .date-card-inner { gap: 8px; }
+      .date-card-inner { gap: 8px; flex-direction: column; align-items: stretch; }
       .date-card-inner .form-group { max-width: none; }
+      .week-display { align-self: flex-start; }
+      .week-edit-input { width: 100%; }
+      .date-actions { margin-left: 0; }
       .phase-name { font-size: 0.85rem; }
       .cat-pills { gap: 4px; }
       .cat-pill { padding: 6px 12px; font-size: 11px; }
@@ -9915,7 +9918,9 @@ function renderProgressBar(protocol, semana) {
     .attr('fill', theme.accentColor)
     .attr('stroke', theme.surfaceColor).attr('stroke-width', 2);
 
-  // Phase labels above bar — truncate based on segment width
+  // Phase labels above bar — hide on mobile (already shown in gantt)
+  const progressMobile = window.innerWidth <= 600;
+  if (!progressMobile) {
   const avgCharW = 5.5; // approx px per char at font 8
   protocol.phases.forEach((phase, idx) => {
     const x1 = xScale(phase.weekStart);
@@ -9936,14 +9941,18 @@ function renderProgressBar(protocol, semana) {
       .attr('fill', isCurrent ? theme.accentColor : theme.textColor)
       .text(shortName);
   });
+  }
 
   // Week labels below bar
-  const tickInterval = totalWeeks <= 12 ? 2 : totalWeeks <= 26 ? 4 : 6;
+  const tickInterval = progressMobile
+    ? (totalWeeks <= 12 ? 4 : totalWeeks <= 26 ? 6 : 8)
+    : (totalWeeks <= 12 ? 2 : totalWeeks <= 26 ? 4 : 6);
+  const weekFontSize = progressMobile ? 9 : 8;
   for (let w = 0; w <= totalWeeks; w += tickInterval) {
     svg.append('text')
       .attr('x', xScale(w)).attr('y', barY + barH + 14)
       .attr('text-anchor', 'middle')
-      .attr('font-size', 8).attr('font-family', 'Inter, sans-serif')
+      .attr('font-size', weekFontSize).attr('font-family', 'Inter, sans-serif')
       .attr('fill', theme.textColor)
       .text(w);
   }
@@ -9952,7 +9961,7 @@ function renderProgressBar(protocol, semana) {
     svg.append('text')
       .attr('x', xScale(totalWeeks)).attr('y', barY + barH + 14)
       .attr('text-anchor', 'middle')
-      .attr('font-size', 8).attr('font-family', 'Inter, sans-serif')
+      .attr('font-size', weekFontSize).attr('font-family', 'Inter, sans-serif')
       .attr('fill', theme.textColor)
       .text(totalWeeks);
   }
@@ -9978,11 +9987,12 @@ function renderGantt(protocol, semana) {
   const theme = getChartTheme();
   const totalWeeks = protocol.totalWeeks || protocol.phases[protocol.phases.length - 1].weekEnd;
   const nPhases = protocol.phases.length;
-  const rowH = 28;
-  const gap = 4;
-  const labelW = 130;
+  const isMobile = window.innerWidth <= 600;
+  const rowH = isMobile ? 24 : 28;
+  const gap = isMobile ? 3 : 4;
+  const labelW = isMobile ? 70 : 130;
   const W = 800;
-  const pad = { left: labelW + 8, right: 16, top: 6, bottom: 20 };
+  const pad = { left: labelW + 8, right: isMobile ? 8 : 16, top: 6, bottom: 20 };
   const chartW = W - pad.left - pad.right;
   const H = pad.top + nPhases * (rowH + gap) - gap + pad.bottom;
 
@@ -10004,22 +10014,24 @@ function renderGantt(protocol, semana) {
     const barWidth = x2 - x1;
 
     // Phase label
-    const shortLabel = 'Fase ' + (idx + 1);
+    const shortLabel = isMobile ? 'F' + (idx + 1) : 'Fase ' + (idx + 1);
     svg.append('text')
-      .attr('x', pad.left - 10).attr('y', y + rowH / 2 + 1)
+      .attr('x', pad.left - 6).attr('y', y + rowH / 2 + (isMobile ? 0 : 1))
       .attr('text-anchor', 'end').attr('dominant-baseline', 'middle')
-      .attr('font-size', 10).attr('font-family', 'Inter, sans-serif')
+      .attr('font-size', isMobile ? 11 : 10).attr('font-family', 'Inter, sans-serif')
       .attr('font-weight', isCurrent ? 700 : 400)
       .attr('fill', isCurrent ? theme.accentColor : theme.textColor)
       .text(shortLabel);
 
     // Week range sub-label
+    if (!isMobile) {
     svg.append('text')
-      .attr('x', pad.left - 10).attr('y', y + rowH / 2 + 11)
+      .attr('x', pad.left - 6).attr('y', y + rowH / 2 + 11)
       .attr('text-anchor', 'end').attr('dominant-baseline', 'middle')
       .attr('font-size', 7.5).attr('font-family', 'Inter, sans-serif')
       .attr('fill', theme.textColor).attr('opacity', 0.5)
       .text('sem ' + phase.weekStart + '-' + phase.weekEnd);
+    }
 
     // Row background track
     svg.append('rect')
@@ -10510,7 +10522,7 @@ const INTERVENTION_META = {
   },
   fuerza: {
     label: 'Fortalecimiento',
-    icon: '<svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M12 2v4m0 12v4M4 12h2m12 0h2M7 17h10M8.5 6.5V17m7-10.5V17"/></svg>'
+    icon: '<svg viewBox="0 0 24 24"><path d="M6.5 6.5h11"/><rect x="3" y="8" width="3" height="8" rx="1"/><rect x="18" y="8" width="3" height="8" rx="1"/><rect x="1" y="10" width="2" height="4" rx="0.5"/><rect x="21" y="10" width="2" height="4" rx="0.5"/><line x1="6" y1="12" x2="18" y2="12"/></svg>'
   },
   equilibrio: {
     label: 'Equilibrio y propiocepcion',
