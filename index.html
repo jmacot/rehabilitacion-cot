@@ -192,14 +192,14 @@
 
     /* ── SELECT PROTOCOLO ── */
     select#protocoloSelect {
-      background: #d6e4f0; color: #1a3a5c; font-weight: 600;
-      cursor: pointer; border-radius: 8px; border-color: #b8cfdf;
-      transition: background 0.2s, box-shadow 0.2s; padding: 8px 32px 8px 12px;
+      background: var(--select-bg, #d6e4f0); color: var(--select-fg, #1a3a5c); font-weight: 600;
+      cursor: pointer; border-radius: 8px; border-color: var(--select-border, #b8cfdf);
+      transition: background 0.3s, box-shadow 0.3s, color 0.3s, border-color 0.3s; padding: 8px 32px 8px 12px;
       font-size: 13px;
     }
-    select#protocoloSelect:hover { background: #c5d9ec; box-shadow: var(--shadow); }
+    select#protocoloSelect:hover { filter: brightness(0.93); box-shadow: var(--shadow); }
     [data-theme="dark"] select#protocoloSelect {
-      background: var(--accent-light); color: var(--accent); border-color: var(--border);
+      background: var(--select-dark-bg, var(--accent-light)); color: var(--select-dark-fg, var(--accent)); border-color: var(--select-dark-border, var(--border));
     }
     /* Search input compact */
     #buscarProtocolo { padding: 8px 12px; font-size: 13px; }
@@ -504,9 +504,9 @@
       </div>
     </div>
     <div class="form-group" style="margin-top:6px">
-      <label>Protocolo</label>
+      <label>Intervencion</label>
       <select id="protocoloSelect">
-        <option value="">-- Seleccione protocolo --</option>
+        <option value="">-- Seleccione intervencion --</option>
       </select>
     </div>
   </div>
@@ -545,7 +545,7 @@
   <!-- EMPTY STATE -->
   <div class="empty-state" id="emptyState">
     <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
-    <p>Seleccione una region y un protocolo<br>para ver las fases de rehabilitacion</p>
+    <p>Seleccione una region y una intervencion<br>para ver las fases de rehabilitacion</p>
   </div>
 
   <div class="app-footer"><span>COT &mdash; Protocolos de Rehabilitacion v1.0</span></div>
@@ -6495,10 +6495,29 @@ function renderRegionPills() {
       activeRegion = r.id;
       renderRegionPills();
       renderProtocolSelect();
+      colorearSelect();
       resetResults();
     };
     container.appendChild(pill);
   });
+}
+
+// ─────────────────────────────────────────────
+//  COLOREAR SELECT SEGUN REGION
+// ─────────────────────────────────────────────
+function colorearSelect() {
+  const sel = document.getElementById('protocoloSelect');
+  const reg = REGIONES.find(r => r.id === activeRegion);
+  if (!reg || reg.id === 'todas') {
+    sel.style.cssText = '';
+  } else {
+    sel.style.setProperty('--select-bg', reg.bg);
+    sel.style.setProperty('--select-fg', reg.fg);
+    sel.style.setProperty('--select-border', reg.fg + '55');
+    sel.style.setProperty('--select-dark-bg', reg.darkBg);
+    sel.style.setProperty('--select-dark-fg', reg.darkFg);
+    sel.style.setProperty('--select-dark-border', reg.darkFg + '55');
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -6507,7 +6526,7 @@ function renderRegionPills() {
 function renderProtocolSelect(filter) {
   const sel = document.getElementById('protocoloSelect');
   const currentVal = sel.value;
-  sel.innerHTML = '<option value="">-- Seleccione protocolo --</option>';
+  sel.innerHTML = '<option value="">-- Seleccione intervencion --</option>';
   let protocols = PROTOCOLOS;
   if (activeRegion !== 'todas') {
     protocols = protocols.filter(p => p.region === activeRegion);
@@ -6614,7 +6633,21 @@ function resetResults() {
 function onProtocolChange() {
   const id = document.getElementById('protocoloSelect').value;
   activeProtocolId = id;
-  if (!id) { resetResults(); return; }
+  if (!id) { resetResults(); colorearSelect(); return; }
+  // Colorear select segun region del protocolo seleccionado
+  const proto = PROTOCOLOS.find(p => p.id === id);
+  if (proto && activeRegion === 'todas') {
+    const reg = REGIONES.find(r => r.id === proto.region);
+    if (reg) {
+      const sel = document.getElementById('protocoloSelect');
+      sel.style.setProperty('--select-bg', reg.bg);
+      sel.style.setProperty('--select-fg', reg.fg);
+      sel.style.setProperty('--select-border', reg.fg + '55');
+      sel.style.setProperty('--select-dark-bg', reg.darkBg);
+      sel.style.setProperty('--select-dark-fg', reg.darkFg);
+      sel.style.setProperty('--select-dark-border', reg.darkFg + '55');
+    }
+  }
   // Reset date/week on protocol change
   document.getElementById('fechaCirugia').value = '';
   document.getElementById('semanasInput').value = '';
@@ -7649,6 +7682,7 @@ function readUrlParams() {
 initTheme();
 renderRegionPills();
 renderProtocolSelect();
+colorearSelect();
 if (!readUrlParams()) {
   restaurarEstado();
 }
