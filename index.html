@@ -157,9 +157,9 @@
       color: var(--text-muted); cursor: pointer; transition: var(--transition);
       white-space: nowrap; display: flex; align-items: center; gap: 5px;
     }
-    .cat-pill:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
-    .cat-pill.active { background: var(--accent); border-color: var(--accent); color: white; box-shadow: var(--shadow-sm); }
-    [data-theme="dark"] .cat-pill.active { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+    .cat-pill:hover { border-color: var(--pill-color, var(--accent)); color: var(--pill-color, var(--accent)); transform: translateY(-1px); }
+    .cat-pill.active { background: var(--pill-color, var(--accent)); border-color: var(--pill-color, var(--accent)); color: white; box-shadow: var(--shadow-sm); }
+    [data-theme="dark"] .cat-pill.active { background: var(--pill-dark-bg, var(--accent-light)); border-color: var(--pill-dark-color, var(--accent)); color: var(--pill-dark-color, var(--accent)); }
     .cat-pill .cat-count { font-size: 10px; opacity: 0.6; font-weight: 400; }
 
     /* ── CARD / FORM ── */
@@ -194,75 +194,68 @@
     select#protocoloSelect {
       background: #d6e4f0; color: #1a3a5c; font-weight: 600;
       cursor: pointer; border-radius: 8px; border-color: #b8cfdf;
-      transition: background 0.2s, box-shadow 0.2s; padding-right: 32px;
+      transition: background 0.2s, box-shadow 0.2s; padding: 8px 32px 8px 12px;
+      font-size: 13px;
     }
     select#protocoloSelect:hover { background: #c5d9ec; box-shadow: var(--shadow); }
     [data-theme="dark"] select#protocoloSelect {
       background: var(--accent-light); color: var(--accent); border-color: var(--border);
     }
+    /* Search input compact */
+    #buscarProtocolo { padding: 8px 12px; font-size: 13px; }
 
-    /* ── DATE CARD COMPACT ── */
+    /* ── DATE CARD ── */
     .date-card-inner {
-      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap;
     }
-    .date-input-wrap {
-      display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;
-    }
-    .date-input-wrap label {
-      font-size: 11px; font-weight: 700; color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
-    }
-    .date-input-wrap input[type="date"] {
-      border: 1.5px solid var(--border); border-radius: 8px;
-      padding: 8px 10px; font-size: 13px; font-family: 'Inter', sans-serif;
-      color: var(--text); background: var(--surface);
-      transition: border-color 0.2s, box-shadow 0.2s; width: auto; min-width: 140px;
-    }
-    .date-input-wrap input[type="date"]:focus {
-      outline: none; border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(26,58,92,0.10);
-    }
-    [data-theme="dark"] .date-input-wrap input[type="date"]:focus {
-      box-shadow: 0 0 0 3px rgba(147,197,253,0.15);
-    }
-    .weeks-input-wrap {
-      display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;
-    }
-    .weeks-input-wrap label {
-      font-size: 11px; font-weight: 700; color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
-    }
-    .weeks-input-wrap input[type="number"] {
-      border: 1.5px solid var(--border); border-radius: 8px;
-      padding: 8px 10px; font-size: 13px; font-family: 'Inter', sans-serif;
-      color: var(--text); background: var(--surface);
-      transition: border-color 0.2s, box-shadow 0.2s; width: 70px;
-    }
-    .weeks-input-wrap input[type="number"]:focus {
-      outline: none; border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(26,58,92,0.10);
+    .date-card-inner .form-group { flex: 1; min-width: 140px; max-width: 200px; }
+    .date-card-inner .form-group input[type="date"],
+    .date-card-inner .form-group input[type="number"] {
+      width: 100%; padding: 10px 14px; font-size: 15px;
     }
 
-    /* ── WEEK BADGE ── */
-    .week-badge {
-      display: inline-flex; align-items: center; gap: 4px;
-      padding: 6px 14px; border-radius: 999px;
-      font-size: 13px; font-weight: 700; font-family: 'Inter', sans-serif;
-      white-space: nowrap; flex-shrink: 0;
+    /* ── WEEK DISPLAY (prominent) ── */
+    .week-display {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 18px; border-radius: var(--radius-sm);
       background: var(--accent); color: white;
+      font-family: 'Inter', sans-serif; font-weight: 700;
+      font-size: 14px; white-space: nowrap; flex-shrink: 0;
+      min-height: 42px; cursor: pointer; transition: all 0.2s;
+      user-select: none;
     }
-    .week-badge.empty { background: var(--surface2); color: var(--text-light); font-weight: 500; }
-    .week-badge .week-num { font-size: 1.1rem; font-family: 'Lora', serif; }
-
-    /* ── MODE SWITCH LINK ── */
-    .mode-switch {
-      font-size: 11px; color: var(--accent); cursor: pointer;
-      text-decoration: underline; text-underline-offset: 2px;
-      background: none; border: none; font-family: 'Inter', sans-serif;
-      padding: 0; transition: opacity 0.2s;
+    .week-display:hover { opacity: 0.85; transform: scale(1.03); }
+    .week-display.empty {
+      background: var(--surface2); color: var(--text-light); font-weight: 500;
+      border: 1.5px dashed var(--border);
     }
-    .mode-switch:hover { opacity: 0.7; }
+    .week-display .week-num {
+      font-size: 1.4rem; font-family: 'Lora', serif; font-weight: 700;
+    }
+    .week-edit-input {
+      width: 80px; padding: 8px 12px; border-radius: var(--radius-sm);
+      border: 2px solid var(--accent); font-size: 1.2rem; font-weight: 700;
+      font-family: 'Lora', serif; text-align: center;
+      color: var(--accent); background: var(--surface);
+      outline: none; -moz-appearance: textfield;
+    }
+    .week-edit-input::-webkit-inner-spin-button,
+    .week-edit-input::-webkit-outer-spin-button { -webkit-appearance: none; }
 
+    /* ── DATE ACTIONS ── */
+    .date-actions {
+      display: flex; gap: 8px; align-items: center; flex-shrink: 0;
+      margin-left: auto;
+    }
+    .btn-clear {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 6px 12px; border-radius: 8px; border: 1.5px solid var(--border);
+      background: transparent; color: var(--text-muted); font-size: 11px;
+      font-weight: 600; font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .btn-clear:hover { border-color: var(--red); color: var(--red); }
+    .btn-clear svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; }
     /* ── DISCLAIMER ── */
     .disclaimer {
       padding: 10px 16px; border-radius: var(--radius-sm);
@@ -372,6 +365,19 @@
       content: ''; position: absolute; left: 0; top: 11px;
       width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.4;
     }
+    .vid-link {
+      display: inline-flex; align-items: center; gap: 3px;
+      color: #dc2626; text-decoration: none; font-weight: 600;
+      border-bottom: 1px dashed rgba(220,38,38,0.3);
+      transition: all 0.2s;
+    }
+    .vid-link:hover { color: #b91c1c; border-bottom-color: #b91c1c; }
+    .vid-link svg {
+      width: 13px; height: 13px; fill: currentColor; flex-shrink: 0;
+      opacity: 0.8;
+    }
+    [data-theme="dark"] .vid-link { color: #f87171; border-bottom-color: rgba(248,113,113,0.3); }
+    [data-theme="dark"] .vid-link:hover { color: #fca5a5; border-bottom-color: #fca5a5; }
 
     /* Precautions */
     .phase-section.precautions .phase-list li::before { background: var(--amber); }
@@ -462,10 +468,8 @@
       .form-row { flex-direction: column; gap: 10px; }
       .form-group { width: 100%; }
       .form-group input, .form-group select { width: 100% !important; }
-      .date-card-inner { flex-wrap: wrap; gap: 8px; }
-      .date-input-wrap { flex-basis: 100%; }
-      .date-input-wrap label { display: none; }
-      .weeks-input-wrap label { display: none; }
+      .date-card-inner { gap: 8px; }
+      .date-card-inner .form-group { max-width: none; }
       .phase-name { font-size: 0.85rem; }
       .cat-pills { gap: 4px; }
       .cat-pill { padding: 6px 12px; font-size: 11px; }
@@ -499,7 +503,7 @@
         <input type="search" id="buscarProtocolo" placeholder="Escriba para filtrar...">
       </div>
     </div>
-    <div class="form-group" style="margin-top:10px">
+    <div class="form-group" style="margin-top:6px">
       <label>Protocolo</label>
       <select id="protocoloSelect">
         <option value="">-- Seleccione protocolo --</option>
@@ -509,21 +513,18 @@
 
   <!-- DATE / WEEKS CARD -->
   <div class="card" id="dateCard" style="display:none">
-    <div class="date-card-inner" id="fechaRow">
-      <div class="date-input-wrap">
+    <div class="date-card-inner">
+      <div class="form-group">
         <label for="fechaCirugia">Fecha de cirugia</label>
         <input type="date" id="fechaCirugia">
       </div>
-      <div class="week-badge empty" id="semanaDisplay"><span class="week-num">--</span> sem</div>
-      <button class="mode-switch" onclick="setInputMode('semanas')">Introducir semanas</button>
-    </div>
-    <div class="date-card-inner" id="semanasRow" style="display:none">
-      <div class="weeks-input-wrap">
-        <label for="semanasInput">Semanas desde cirugia</label>
-        <input type="number" id="semanasInput" min="0" max="104" placeholder="0">
+      <div class="week-display empty" id="semanaDisplay" onclick="editarSemanas()" title="Clic para introducir semanas manualmente">
+        <span class="week-num">--</span> sem
       </div>
-      <div class="week-badge empty" id="semanaDisplay2"><span class="week-num">--</span> sem</div>
-      <button class="mode-switch" onclick="setInputMode('fecha')">Introducir fecha</button>
+      <input type="number" class="week-edit-input" id="semanasInput" min="0" max="104" placeholder="0" style="display:none">
+      <div class="date-actions">
+        <button class="btn-clear" id="btnClear" onclick="limpiarFecha()" style="display:none"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg> Limpiar</button>
+      </div>
     </div>
   </div>
 
@@ -558,13 +559,14 @@
 //  REGIONES
 // ─────────────────────────────────────────────
 const REGIONES = [
-  { id: 'todas', label: 'Todas' },
-  { id: 'rodilla', label: 'Rodilla' },
-  { id: 'hombro', label: 'Hombro' },
-  { id: 'cadera', label: 'Cadera' },
-  { id: 'pie', label: 'Pie y Tobillo' },
-  { id: 'codo', label: 'Codo' },
-  { id: 'columna', label: 'Columna' },
+  { id: 'todas', label: 'Todas', fg: '#1a3a5c', bg: '#eef2f7', darkFg: '#93c5fd', darkBg: '#1e3a5f' },
+  { id: 'rodilla', label: 'Rodilla', fg: '#16a34a', bg: '#dcfce7', darkFg: '#4ade80', darkBg: '#14352a' },
+  { id: 'hombro', label: 'Hombro', fg: '#2563eb', bg: '#dbeafe', darkFg: '#60a5fa', darkBg: '#1e3a5f' },
+  { id: 'cadera', label: 'Cadera', fg: '#d97706', bg: '#fef3c7', darkFg: '#fbbf24', darkBg: '#3b2a10' },
+  { id: 'pie', label: 'Pie y Tobillo', fg: '#ea580c', bg: '#ffedd5', darkFg: '#fb923c', darkBg: '#431407' },
+  { id: 'codo', label: 'Codo', fg: '#db2777', bg: '#fce7f3', darkFg: '#f472b6', darkBg: '#4a1942' },
+  { id: 'columna', label: 'Columna', fg: '#6366f1', bg: '#e0e7ff', darkFg: '#a5b4fc', darkBg: '#312e81' },
+  { id: 'muneca', label: 'Muneca y Mano', fg: '#7c3aed', bg: '#ede9fe', darkFg: '#a78bfa', darkBg: '#2e1065' },
 ];
 
 // ─────────────────────────────────────────────
@@ -4663,7 +4665,7 @@ const PROTOCOLOS = [
 // ─────────────────────────────────────────────
 let activeRegion = 'todas';
 let activeProtocolId = '';
-let inputMode = 'fecha';
+// inputMode removed — weeks editable inline via click on badge
 let currentWeek = null;
 
 // ─────────────────────────────────────────────
@@ -4699,13 +4701,11 @@ function determinarFase(protocol, semana) {
 }
 
 function obtenerSemana() {
-  if (inputMode === 'fecha') {
-    const val = document.getElementById('fechaCirugia').value;
-    return val ? calcularSemanas(val) : null;
-  } else {
-    const val = document.getElementById('semanasInput').value;
-    return val !== '' ? parseInt(val) : null;
-  }
+  // Manual weeks override date
+  const manualVal = document.getElementById('semanasInput').value;
+  if (manualVal !== '') return parseInt(manualVal);
+  const dateVal = document.getElementById('fechaCirugia').value;
+  return dateVal ? calcularSemanas(dateVal) : null;
 }
 
 // ─────────────────────────────────────────────
@@ -4716,8 +4716,10 @@ function renderRegionPills() {
   container.innerHTML = '';
   REGIONES.forEach(r => {
     const count = r.id === 'todas' ? PROTOCOLOS.length : PROTOCOLOS.filter(p => p.region === r.id).length;
+    if (count === 0 && r.id !== 'todas') return;
     const pill = document.createElement('button');
     pill.className = 'cat-pill' + (activeRegion === r.id ? ' active' : '');
+    pill.style.cssText = '--pill-color:' + r.fg + ';--pill-dark-color:' + r.darkFg + ';--pill-dark-bg:' + r.darkBg;
     pill.innerHTML = r.label + ' <span class="cat-count">' + count + '</span>';
     pill.onclick = () => {
       activeRegion = r.id;
@@ -4781,30 +4783,49 @@ function renderProtocolSelect(filter) {
 }
 
 // ─────────────────────────────────────────────
-//  INPUT MODE TOGGLE
+//  WEEK DISPLAY & INLINE EDIT
 // ─────────────────────────────────────────────
-function setInputMode(mode) {
-  inputMode = mode;
-  document.getElementById('fechaRow').style.display = mode === 'fecha' ? '' : 'none';
-  document.getElementById('semanasRow').style.display = mode === 'semanas' ? '' : 'none';
-  actualizarSemana();
-}
-
 function actualizarSemana() {
   const semana = obtenerSemana();
   currentWeek = semana;
-  const badges = [document.getElementById('semanaDisplay'), document.getElementById('semanaDisplay2')];
-  badges.forEach(badge => {
-    const numSpan = badge.querySelector('.week-num');
-    if (semana !== null && semana >= 0) {
-      numSpan.textContent = semana;
-      badge.classList.remove('empty');
-    } else {
-      numSpan.textContent = '--';
-      badge.classList.add('empty');
-    }
-  });
+  const display = document.getElementById('semanaDisplay');
+  const numSpan = display.querySelector('.week-num');
+  const hasValue = semana !== null && semana >= 0;
+  if (hasValue) {
+    numSpan.textContent = semana;
+    display.classList.remove('empty');
+  } else {
+    numSpan.textContent = '--';
+    display.classList.add('empty');
+  }
+  document.getElementById('btnClear').style.display = hasValue ? '' : 'none';
   renderResults();
+}
+
+function editarSemanas() {
+  const display = document.getElementById('semanaDisplay');
+  const input = document.getElementById('semanasInput');
+  display.style.display = 'none';
+  input.style.display = '';
+  input.value = currentWeek !== null && currentWeek >= 0 ? currentWeek : '';
+  input.focus();
+  input.select();
+}
+
+function cerrarEdicionSemanas() {
+  const display = document.getElementById('semanaDisplay');
+  const input = document.getElementById('semanasInput');
+  input.style.display = 'none';
+  display.style.display = '';
+  actualizarSemana();
+}
+
+function limpiarFecha() {
+  document.getElementById('fechaCirugia').value = '';
+  document.getElementById('semanasInput').value = '';
+  document.getElementById('semanasInput').style.display = 'none';
+  document.getElementById('semanaDisplay').style.display = '';
+  actualizarSemana();
 }
 
 // ─────────────────────────────────────────────
@@ -4824,6 +4845,13 @@ function onProtocolChange() {
   const id = document.getElementById('protocoloSelect').value;
   activeProtocolId = id;
   if (!id) { resetResults(); return; }
+  // Reset date/week on protocol change
+  document.getElementById('fechaCirugia').value = '';
+  document.getElementById('semanasInput').value = '';
+  document.getElementById('semanasInput').style.display = 'none';
+  document.getElementById('semanaDisplay').style.display = '';
+  currentWeek = null;
+  actualizarSemana();
   document.getElementById('dateCard').style.display = '';
   document.getElementById('emptyState').style.display = 'none';
   renderResults();
@@ -4835,13 +4863,12 @@ function renderResults() {
   if (!protocol) return;
   const semana = obtenerSemana();
   if (semana === null || semana < 0) {
-    // No date entered yet — hide phases and timeline
+    // No week yet — show phases collapsed, hide timeline
     document.getElementById('d3-progress').innerHTML = '';
     document.getElementById('d3-gantt').innerHTML = '';
     document.getElementById('timelineWrap').classList.remove('visible');
-    document.getElementById('phasesContainer').classList.remove('visible');
-    document.getElementById('phasesContainer').innerHTML = '';
     document.getElementById('disclaimer').classList.remove('visible');
+    renderPhases(protocol, null);
     return;
   }
   document.getElementById('disclaimer').classList.add('visible');
@@ -5147,6 +5174,412 @@ function scrollToPhase(idx) {
 }
 
 // ─────────────────────────────────────────────
+//  EXERCISE VIDEO LINKS
+// ─────────────────────────────────────────────
+const EXERCISE_LINKS = {
+  'rodilla_lca': {
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'movilizaciones patelares':'https://www.youtube.com/watch?v=ewsrnC2OTos',
+    'flexo-extension de rodilla asistida':'https://www.youtube.com/watch?v=Ci_iEOLTLzI',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'colgamiento en prono':'https://www.youtube.com/watch?v=syHONdwbJuw',
+    'apoyo de talon':'https://www.youtube.com/watch?v=TmIsk_X5pS4',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'estiramiento de soleo':'https://www.youtube.com/watch?v=J0jgWqbBR2E',
+    'estiramiento pasivo de isquiotibiales':'https://www.youtube.com/watch?v=MCMWkks_fq0',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'quad sets':'https://www.youtube.com/watch?v=D0WikGbm1xs',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'estiramiento de cuadriceps en prono':'https://www.youtube.com/watch?v=lglR4T94EyY',
+    'estiramiento de cuadriceps en bipedestacion':'https://www.youtube.com/watch?v=j-KreYRNOCc',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'subidas al escalon':'https://www.youtube.com/watch?v=bu0f15I9sWQ',
+    'sentadillas con pelota':'https://www.youtube.com/watch?v=xnUiMPbiXyE',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'mini sentadillas':'https://www.youtube.com/watch?v=0YAFlev6AYg',
+    'prensa de piernas':'https://www.youtube.com/watch?v=bAfJ5Ov8jXw',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'pasos laterales':'https://www.youtube.com/watch?v=6w_02_aHhOc',
+    'maquina de abductores y aductores':'https://www.youtube.com/watch?v=8TebPpP8FuA',
+    'maquina de extension de cadera':'https://www.youtube.com/watch?v=lwqNo8ypMDo',
+    'silla romana':'https://www.youtube.com/watch?v=_5vQZAjtV0U',
+    'maquina de gemelos sentado':'https://www.youtube.com/watch?v=y7CnGaTsUiY',
+    'sentadilla a silla':'https://www.youtube.com/watch?v=-ni9-gco1jo',
+    'zancadas laterales':'https://www.youtube.com/watch?v=MvpBUsQrt_4',
+    'paseos laterales con banda':'https://www.youtube.com/watch?v=o6lmGWbu36s',
+    'peso muerto a una pierna':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'prensa a una pierna':'https://www.youtube.com/watch?v=39IN4b-X5ck',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'bajadas del escalon':'https://www.youtube.com/watch?v=Mzd2hL3VhTM',
+    'sentadillas a una pierna':'https://www.youtube.com/watch?v=hfEb7dJYZ0E',
+    'extension de rodilla en sedestacion':'https://www.youtube.com/watch?v=Uq_qBzbdlH4',
+    'drop jump bilateral':'https://www.youtube.com/watch?v=62ab-z3Mi0A'
+  },
+  'rodilla_mosaicoplastia': {
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'hip hike':'https://www.youtube.com/watch?v=V6swLhJYULg',
+    'zancadas laterales':'https://www.youtube.com/watch?v=MvpBUsQrt_4',
+    'peso muerto rumano':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'prensa a una pierna':'https://www.youtube.com/watch?v=39IN4b-X5ck',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'subidas al escalon':'https://www.youtube.com/watch?v=bu0f15I9sWQ',
+    'bajadas del escalon':'https://www.youtube.com/watch?v=Mzd2hL3VhTM',
+    'sentadillas a una pierna':'https://www.youtube.com/watch?v=hfEb7dJYZ0E',
+    'deslizamientos de pierna en pared':'https://www.youtube.com/watch?v=F1K-rRfv7OI',
+    'pasos laterales':'https://www.youtube.com/watch?v=6w_02_aHhOc'
+  },
+  'cadera_labral': {
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'quad sets':'https://www.youtube.com/watch?v=twfgmUJ6b88',
+    'puente bilateral':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0'
+  },
+  'hombro_manguito_rotador_pequeno_mediano': {
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k',
+    'retraccion escapular en prono':'https://www.youtube.com/watch?v=zxpgjMfxuOA',
+    'activacion escapular':'https://www.youtube.com/watch?v=OcSL9_B1Ajk',
+    'remo bajo':'https://www.youtube.com/watch?v=VKxyyXnB9uo',
+    'flexion de hombro con baston':'https://www.youtube.com/watch?v=JwRlLR6i9q4',
+    'estiramiento de rotacion externa con baston':'https://www.youtube.com/watch?v=8yPGxov0HlA',
+    'presion de toalla':'https://www.youtube.com/watch?v=qPB9UstYwuw',
+    'elevacion lateral a 90 grados':'https://www.youtube.com/watch?v=36xLJ_C22n0',
+    'remo sobre fitball':'https://www.youtube.com/watch?v=4EFxBGeDjPo',
+    'extension de hombro sobre fitball':'https://www.youtube.com/watch?v=NWShp6kdvC4',
+    'elevacion de hombro con baston':'https://www.youtube.com/watch?v=isLt0aXBxeE',
+    'rodar pelota en pared':'https://www.youtube.com/watch?v=LMFcHrKwz1o',
+    'salutes':'https://www.youtube.com/watch?v=GYvNr87eXxQ',
+    'punch en supino':'https://www.youtube.com/watch?v=j1WKP2UMBoM',
+    'extension de hombro con banda':'https://www.youtube.com/watch?v=JvauW9ZAUSQ',
+    'robbery':'https://www.youtube.com/watch?v=Z7XnzaUyf70',
+    'punches de serrato':'https://www.youtube.com/watch?v=M-vsEfJIoWE',
+    'curl de biceps':'https://www.youtube.com/watch?time_continue=6&v=LwZ2sBlOMgs',
+    'curl de biceps con banda':'https://www.youtube.com/watch?time_continue=2&v=FVCmVLwRNe0',
+    'push-up plus de rodillas':'https://www.youtube.com/watch?v=Uo-GNl3Xpo8',
+    'punch frontal con banda':'https://www.youtube.com/watch?v=_DPE36SvqLY',
+    'punch frontal':'https://www.youtube.com/watch?v=AsBdDc6nd2w',
+    'bird-dog':'https://www.youtube.com/watch?v=BFJ3jxWY6-E',
+    'sleeper stretch':'https://www.youtube.com/watch?v=IBWToThYZgo',
+    'serie en marco de puerta':'https://www.youtube.com/watch?v=hhI-n2EhIzU',
+    'isometricos de rotacion':'https://www.youtube.com/watch?v=r8O5zeL4ouA',
+    'rotacion externa en decubito lateral':'https://www.youtube.com/watch?v=2E4oVeixUXc',
+    'rotacion externa en bipedestacion con banda':'https://www.youtube.com/watch?v=y8WKcz0vqzg',
+    'rotacion interna en bipedestacion con banda':'https://www.youtube.com/watch?v=HJIZP6hoMZU',
+    'push-up plus extendido':'https://www.youtube.com/watch?v=JSR6Q26FJZo',
+    'flexiones de pared':'https://www.youtube.com/watch?v=mzas56LnGJE',
+    'abrazo dinamico':'https://www.youtube.com/watch?v=b9QGHtHoMww',
+    'abrazo dinamico con banda':'https://www.youtube.com/watch?v=NJSkgeUnm6A',
+    'field goals':'https://www.youtube.com/watch?v=agzYAK_ViTU',
+    'rotacion externa a 90 grados':'https://www.youtube.com/watch?v=obdZozRUBwA',
+    'rotacion interna a 90 grados':'https://www.youtube.com/watch?v=s_9GcwhDLkE',
+    'deslizamientos en pared con banda':'https://www.youtube.com/watch?v=LIi-akh1zZc'
+  },
+  'hombro_slap': {
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k',
+    'retraccion escapular en prono':'https://www.youtube.com/watch?v=zxpgjMfxuOA',
+    'activacion escapular':'https://www.youtube.com/watch?v=OcSL9_B1Ajk',
+    'remo bajo':'https://www.youtube.com/watch?v=VKxyyXnB9uo',
+    'flexion activo-asistida de hombro':'https://www.youtube.com/watch?v=lbXQcFF5J6M',
+    'flexion de hombro con baston':'https://www.youtube.com/watch?v=JwRlLR6i9q4',
+    'estiramiento de rotacion externa con baston':'https://www.youtube.com/watch?v=8yPGxov0HlA',
+    'presion de toalla':'https://www.youtube.com/watch?v=qPB9UstYwuw',
+    'remo sobre fitball':'https://www.youtube.com/watch?v=4EFxBGeDjPo',
+    'extension de hombro sobre fitball':'https://www.youtube.com/watch?v=NWShp6kdvC4',
+    'punches de serrato':'https://www.youtube.com/watch?v=M-vsEfJIoWE',
+    'sleeper stretch':'https://www.youtube.com/watch?v=IBWToThYZgo',
+    'elevacion de hombro con baston':'https://www.youtube.com/watch?v=isLt0aXBxeE',
+    'salutes':'https://www.youtube.com/watch?v=GYvNr87eXxQ',
+    'punch en supino':'https://www.youtube.com/watch?v=j1WKP2UMBoM',
+    'rotacion externa en decubito lateral':'https://www.youtube.com/watch?v=2E4oVeixUXc',
+    'rotacion externa en bipedestacion con banda':'https://www.youtube.com/watch?v=y8WKcz0vqzg',
+    'extension de hombro con banda':'https://www.youtube.com/watch?v=JvauW9ZAUSQ',
+    'remo sentado con banda':'https://www.youtube.com/watch?v=qcWV51tONJ8',
+    'lawnmowers':'https://www.youtube.com/watch?time_continue=1&v=uEF8uOvZ1As',
+    'robbery':'https://www.youtube.com/watch?v=Z7XnzaUyf70',
+    'extension de codo con banda':'https://www.youtube.com/watch?v=s3K-0t_fdxI',
+    'scaption sentado':'https://www.youtube.com/watch?v=VZarOj3rqTk',
+    'push-up plus de rodillas':'https://www.youtube.com/watch?v=Uo-GNl3Xpo8',
+    'punch frontal con banda':'https://www.youtube.com/watch?v=_DPE36SvqLY',
+    'curl de biceps con banda':'https://www.youtube.com/watch?time_continue=2&v=FVCmVLwRNe0',
+    'serie en marco de puerta':'https://www.youtube.com/watch?v=hhI-n2EhIzU',
+    'rotacion interna a 90 grados':'https://www.youtube.com/watch?v=XeTmJlBegvs',
+    'push-up plus extendido':'https://www.youtube.com/watch?v=JSR6Q26FJZo',
+    'bird-dog':'https://www.youtube.com/watch?v=BFJ3jxWY6-E',
+    'flexiones de pared':'https://www.youtube.com/watch?v=mzas56LnGJE',
+    'abrazo dinamico con banda':'https://www.youtube.com/watch?v=NJSkgeUnm6A',
+    'field goals':'https://www.youtube.com/watch?v=agzYAK_ViTU',
+    'deslizamientos en pared con banda':'https://www.youtube.com/watch?v=LIi-akh1zZc'
+  },
+  'hombro_artroplastia': {
+    'pendulares':'https://www.youtube.com/watch?v=ajOYMMszqTI',
+    'flexion activo-asistida de hombro':'https://www.youtube.com/watch?v=lbXQcFF5J6M',
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k',
+    'retraccion escapular en prono':'https://www.youtube.com/watch?v=zxpgjMfxuOA',
+    'activacion escapular':'https://www.youtube.com/watch?v=OcSL9_B1Ajk',
+    'remo bajo':'https://www.youtube.com/watch?v=VKxyyXnB9uo',
+    'flexion de hombro con baston':'https://www.youtube.com/watch?v=JwRlLR6i9q4',
+    'estiramiento de rotacion externa con baston':'https://www.youtube.com/watch?v=8yPGxov0HlA',
+    'presion de toalla':'https://www.youtube.com/watch?v=qPB9UstYwuw',
+    'salutes':'https://www.youtube.com/watch?v=GYvNr87eXxQ',
+    'punch en supino':'https://www.youtube.com/watch?v=j1WKP2UMBoM',
+    'isometricos de rotacion externa':'https://www.youtube.com/watch?v=r8O5zeL4ouA',
+    'remo sobre fitball':'https://www.youtube.com/watch?v=4EFxBGeDjPo',
+    'punches de serrato':'https://www.youtube.com/watch?v=M-vsEfJIoWE',
+    'curl de biceps':'https://www.youtube.com/watch?time_continue=6&v=LwZ2sBlOMgs',
+    'curl de biceps con banda':'https://www.youtube.com/watch?time_continue=2&v=FVCmVLwRNe0',
+    'deslizamientos en mesa inclinada':'https://www.youtube.com/watch?v=92NCvHp-Z9I',
+    'rodar pelota en pared':'https://www.youtube.com/watch?v=LMFcHrKwz1o',
+    'poleas':'https://www.youtube.com/watch?v=3Cs7-WLQTPU',
+    'scaption sentado':'https://www.youtube.com/watch?v=VZarOj3rqTk',
+    'isometricos de rotacion interna':'https://www.youtube.com/watch?v=r8O5zeL4ouA',
+    'rotacion externa en decubito lateral':'https://www.youtube.com/watch?v=2E4oVeixUXc',
+    'rotacion externa en bipedestacion con banda':'https://www.youtube.com/watch?v=y8WKcz0vqzg',
+    'rotacion interna en bipedestacion con banda':'https://www.youtube.com/watch?v=HJIZP6hoMZU',
+    'extension de hombro con banda':'https://www.youtube.com/watch?v=JvauW9ZAUSQ',
+    'robbery':'https://www.youtube.com/watch?v=Z7XnzaUyf70',
+    'sleeper stretch':'https://www.youtube.com/watch?v=IBWToThYZgo',
+    'push-up plus de rodillas':'https://www.youtube.com/watch?v=Uo-GNl3Xpo8',
+    'abrazo dinamico':'https://www.youtube.com/watch?v=b9QGHtHoMww',
+    'punch frontal con banda':'https://www.youtube.com/watch?v=_DPE36SvqLY',
+    'punch frontal':'https://www.youtube.com/watch?v=AsBdDc6nd2w',
+    'bird-dog':'https://www.youtube.com/watch?v=BFJ3jxWY6-E',
+    'deslizamientos en pared con banda':'https://www.youtube.com/watch?v=LIi-akh1zZc',
+    'rotacion externa a 90 grados':'https://www.youtube.com/watch?v=obdZozRUBwA',
+    'rotacion interna a 90 grados':'https://www.youtube.com/watch?v=s_9GcwhDLkE',
+    'push-up plus extendido':'https://www.youtube.com/watch?v=JSR6Q26FJZo',
+    'flexiones de pared':'https://www.youtube.com/watch?v=mzas56LnGJE'
+  },
+  'pie_aquiles': {
+    'estiramiento pasivo de isquiotibiales':'https://www.youtube.com/watch?v=MCMWkks_fq0',
+    'quad sets':'https://www.youtube.com/watch?v=twfgmUJ6b88',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=mZ6ERQjCL6k',
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'estiramiento de cuadriceps en bipedestacion':'https://www.youtube.com/watch?v=j-KreYRNOCc',
+    'estiramiento de flexores de cadera':'https://www.youtube.com/watch?v=34SlL-PPCWQ',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'tobillo 4 direcciones con banda':'https://www.youtube.com/watch?v=wE3tvqHYPwY',
+    'maquina de abductores y aductores':'https://www.youtube.com/watch?v=8TebPpP8FuA',
+    'maquina de extension de cadera':'https://www.youtube.com/watch?v=lwqNo8ypMDo',
+    'silla romana':'https://www.youtube.com/watch?v=_5vQZAjtV0U',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'prensa de piernas':'https://www.youtube.com/watch?v=bAfJ5Ov8jXw',
+    'maquina de gemelos sentado':'https://www.youtube.com/watch?v=y7CnGaTsUiY',
+    'hip hike':'https://www.youtube.com/watch?v=V6swLhJYULg',
+    'zancadas laterales':'https://www.youtube.com/watch?v=MvpBUsQrt_4',
+    'sentadillas bilaterales':'https://www.youtube.com/watch?v=-ni9-gco1jo',
+    'prensa a una pierna':'https://www.youtube.com/watch?v=39IN4b-X5ck',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'subidas al escalon':'https://www.youtube.com/watch?v=bu0f15I9sWQ',
+    'sentadillas a una pierna':'https://www.youtube.com/watch?v=hfEb7dJYZ0E',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'estiramiento de soleo':'https://www.youtube.com/watch?v=J0jgWqbBR2E'
+  },
+  'pie_fractura_tobillo': {
+    'silla romana':'https://www.youtube.com/watch?v=_5vQZAjtV0U',
+    'estiramiento de cuadriceps en bipedestacion':'https://www.youtube.com/watch?v=j-KreYRNOCc',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'maquina de abductores y aductores':'https://www.youtube.com/watch?v=8TebPpP8FuA',
+    'maquina de extension de cadera':'https://www.youtube.com/watch?v=lwqNo8ypMDo',
+    'hip hike':'https://www.youtube.com/watch?v=V6swLhJYULg',
+    'zancadas frontales':'https://www.youtube.com/watch?v=MvpBUsQrt_4',
+    'prensa a una pierna':'https://www.youtube.com/watch?v=39IN4b-X5ck',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'subidas al escalon':'https://www.youtube.com/watch?v=bu0f15I9sWQ',
+    'bajadas del escalon':'https://www.youtube.com/watch?v=Mzd2hL3VhTM'
+  },
+  'hombro_manguito_grande_no_op': {
+    'deslizamiento horizontal en mesa':'https://www.youtube.com/watch?v=fMm1EG4wKvI',
+    'flexion activo-asistida de hombro':'https://www.youtube.com/watch?v=lbXQcFF5J6M',
+    'flexion de hombro con baston':'https://www.youtube.com/watch?v=JwRlLR6i9q4',
+    'presion de toalla':'https://www.youtube.com/watch?v=qPB9UstYwuw',
+    'elevacion lateral a 90 grados':'https://www.youtube.com/watch?v=36xLJ_C22n0',
+    'rodar pelota en pared':'https://www.youtube.com/watch?v=LMFcHrKwz1o',
+    'salutes':'https://www.youtube.com/watch?v=GYvNr87eXxQ',
+    'punch en supino':'https://www.youtube.com/watch?v=j1WKP2UMBoM',
+    'sleeper stretch':'https://www.youtube.com/watch?v=IBWToThYZgo',
+    'serie en marco de puerta':'https://www.youtube.com/watch?v=hhI-n2EhIzU',
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k',
+    'activacion escapular':'https://www.youtube.com/watch?v=3X57B3y39EY',
+    'remo bajo':'https://www.youtube.com/watch?v=VKxyyXnB9uo',
+    'isometricos de rotacion':'https://www.youtube.com/watch?v=r8O5zeL4ouA',
+    'rotacion externa en decubito lateral':'https://www.youtube.com/watch?v=2E4oVeixUXc',
+    'rotacion externa en bipedestacion con banda':'https://www.youtube.com/watch?v=y8WKcz0vqzg',
+    'remo sobre fitball':'https://www.youtube.com/watch?v=4EFxBGeDjPo',
+    'extension de hombro sobre fitball':'https://www.youtube.com/watch?v=NWShp6kdvC4',
+    'lawnmowers':'https://www.youtube.com/watch?time_continue=1&v=uEF8uOvZ1As',
+    'robbery':'https://www.youtube.com/watch?v=Z7XnzaUyf70',
+    'punches de serrato':'https://www.youtube.com/watch?v=M-vsEfJIoWE',
+    'push-up plus de rodillas':'https://www.youtube.com/watch?v=Uo-GNl3Xpo8',
+    'punch frontal':'https://www.youtube.com/watch?v=_DPE36SvqLY',
+    'bird-dog':'https://www.youtube.com/watch?v=BFJ3jxWY6-E',
+    'push-up plus extendido':'https://www.youtube.com/watch?v=JSR6Q26FJZo',
+    'abrazo dinamico':'https://www.youtube.com/watch?v=b9QGHtHoMww',
+    'abrazo dinamico con banda':'https://www.youtube.com/watch?v=NJSkgeUnm6A',
+    'rotacion interna a 90 grados':'https://www.youtube.com/watch?v=s_9GcwhDLkE',
+    'field goals':'https://www.youtube.com/watch?v=agzYAK_ViTU',
+    'deslizamientos en pared con banda':'https://www.youtube.com/watch?v=LIi-akh1zZc'
+  },
+  'hombro_pectoral': {
+    'remo bajo':'https://www.youtube.com/watch?v=VKxyyXnB9uo',
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k',
+    'retraccion escapular en prono':'https://www.youtube.com/watch?v=zxpgjMfxuOA',
+    'activacion escapular':'https://www.youtube.com/watch?v=3X57B3y39EY'
+  },
+  'hombro_protesis_inversa': {
+    'pendulares':'https://www.youtube.com/watch?v=ajOYMMszqTI',
+    'flexion activo-asistida de hombro':'https://www.youtube.com/watch?v=lbXQcFF5J6M',
+    'flexion de hombro con baston':'https://www.youtube.com/watch?v=JwRlLR6i9q4',
+    'presion de toalla':'https://www.youtube.com/watch?v=qPB9UstYwuw',
+    'elevacion de hombro con baston':'https://www.youtube.com/watch?v=isLt0aXBxeE',
+    'salutes':'https://www.youtube.com/watch?v=GYvNr87eXxQ',
+    'punch en supino':'https://www.youtube.com/watch?v=j1WKP2UMBoM',
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k',
+    'activacion escapular':'https://www.youtube.com/watch?v=3X57B3y39EY',
+    'remo bajo':'https://www.youtube.com/watch?v=VKxyyXnB9uo',
+    'deslizamientos en mesa inclinada':'https://www.youtube.com/watch?v=92NCvHp-Z9I',
+    'poleas':'https://www.youtube.com/watch?v=3Cs7-WLQTPU',
+    'scaption sentado':'https://www.youtube.com/watch?v=VZarOj3rqTk',
+    'remo sobre fitball':'https://www.youtube.com/watch?v=4EFxBGeDjPo',
+    'punches de serrato':'https://www.youtube.com/watch?v=M-vsEfJIoWE',
+    'rodar pelota en pared':'https://www.youtube.com/watch?v=LMFcHrKwz1o',
+    'extension de hombro con banda':'https://www.youtube.com/watch?v=JvauW9ZAUSQ',
+    'remo sentado con banda':'https://www.youtube.com/watch?v=qcWV51tONJ8',
+    'robbery':'https://www.youtube.com/watch?v=Z7XnzaUyf70',
+    'lawnmowers':'https://www.youtube.com/watch?time_continue=1&v=uEF8uOvZ1As',
+    'bird-dog':'https://www.youtube.com/watch?v=BFJ3jxWY6-E',
+    'field goals':'https://www.youtube.com/watch?v=agzYAK_ViTU',
+    'push-up plus de rodillas':'https://www.youtube.com/watch?v=Uo-GNl3Xpo8',
+    'extension de hombro en prono':'https://www.youtube.com/watch?time_continue=6&v=f1wcVlOFR9o',
+    'abrazo dinamico':'https://www.youtube.com/watch?v=b9QGHtHoMww',
+    'abrazo dinamico con banda':'https://www.youtube.com/watch?v=NJSkgeUnm6A',
+    'punch frontal con banda':'https://www.youtube.com/watch?v=_DPE36SvqLY',
+    'punch frontal':'https://www.youtube.com/watch?v=AsBdDc6nd2w',
+    'isometricos de rotacion':'https://www.youtube.com/watch?v=r8O5zeL4ouA',
+    'rotacion externa en decubito lateral':'https://www.youtube.com/watch?v=2E4oVeixUXc',
+    'rotacion interna en bipedestacion con banda':'https://www.youtube.com/watch?v=HJIZP6hoMZU',
+    'deslizamientos en pared con banda':'https://www.youtube.com/watch?v=LIi-akh1zZc'
+  },
+  'pie_peroneos': {
+    'estiramiento pasivo de isquiotibiales':'https://www.youtube.com/watch?v=MCMWkks_fq0',
+    'quad sets':'https://www.youtube.com/watch?v=D0WikGbm1xs',
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'maquina de abductores y aductores':'https://www.youtube.com/watch?v=8TebPpP8FuA',
+    'maquina de extension de cadera':'https://www.youtube.com/watch?v=lwqNo8ypMDo',
+    'silla romana':'https://www.youtube.com/watch?v=_5vQZAjtV0U',
+    'peso muerto rumano':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'maquina de gemelos sentado':'https://www.youtube.com/watch?v=y7CnGaTsUiY',
+    'hip hike':'https://www.youtube.com/watch?v=V6swLhJYULg',
+    'zancadas frontales':'https://www.youtube.com/watch?v=MvpBUsQrt_4',
+    'zancadas laterales':'https://www.youtube.com/watch?v=MvpBUsQrt_4',
+    'prensa a una pierna':'https://www.youtube.com/watch?v=39IN4b-X5ck',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'subidas al escalon':'https://www.youtube.com/watch?v=bu0f15I9sWQ',
+    'bajadas del escalon':'https://www.youtube.com/watch?v=Mzd2hL3VhTM'
+  },
+  'pie_protesis_tobillo': {
+    'estiramiento pasivo de isquiotibiales':'https://www.youtube.com/watch?v=MCMWkks_fq0',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=x4aLje2kGKU',
+    'estiramiento de cuadriceps en bipedestacion':'https://www.youtube.com/watch?v=j-KreYRNOCc',
+    'estiramiento de flexores de cadera':'https://www.youtube.com/watch?v=34SlL-PPCWQ',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'maquina de extension de cadera':'https://www.youtube.com/watch?v=lwqNo8ypMDo',
+    'silla romana':'https://www.youtube.com/watch?v=_5vQZAjtV0U',
+    'peso muerto rumano':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'maquina de gemelos sentado':'https://www.youtube.com/watch?v=y7CnGaTsUiY',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=aD2NhWvuL8Y',
+    'hip hike':'https://www.youtube.com/watch?v=V6swLhJYULg',
+    'zancadas frontales':'https://www.youtube.com/watch?v=MvpBUsQrt_4',
+    'zancadas laterales':'https://www.youtube.com/watch?v=MvpBUsQrt_4',
+    'prensa a una pierna':'https://www.youtube.com/watch?v=39IN4b-X5ck',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'subidas al escalon':'https://www.youtube.com/watch?v=bu0f15I9sWQ',
+    'sentadillas a una pierna':'https://www.youtube.com/watch?v=hfEb7dJYZ0E'
+  },
+  'rodilla_lca_no_op': {
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'movilizaciones patelares':'https://www.youtube.com/watch?v=ewsrnC2OTos',
+    'flexo-extension de rodilla asistida':'https://www.youtube.com/watch?v=Ci_iEOLTLzI',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'colgamiento en prono':'https://www.youtube.com/watch?v=syHONdwbJuw',
+    'apoyo de talon':'https://www.youtube.com/watch?v=TmIsk_X5pS4',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'estiramiento de soleo':'https://www.youtube.com/watch?v=J0jgWqbBR2E',
+    'estiramiento pasivo de isquiotibiales':'https://www.youtube.com/watch?v=MCMWkks_fq0',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'quad sets':'https://www.youtube.com/watch?v=D0WikGbm1xs',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'estiramiento de cuadriceps en prono':'https://www.youtube.com/watch?v=lglR4T94EyY',
+    'estiramiento de cuadriceps en bipedestacion':'https://www.youtube.com/watch?v=j-KreYRNOCc',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=x4aLje2kGKU',
+    'subidas al escalon':'https://www.youtube.com/watch?v=bu0f15I9sWQ',
+    'sentadillas parciales':'https://www.youtube.com/watch?v=jaPzvgZFQBI',
+    'sentadillas con pelota':'https://www.youtube.com/watch?v=xnUiMPbiXyE',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'mini sentadillas':'https://www.youtube.com/watch?v=0YAFlev6AYg',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'hip hike':'https://www.youtube.com/watch?v=V6swLhJYULg',
+    'pasos laterales':'https://www.youtube.com/watch?v=6w_02_aHhOc'
+  },
+  'rodilla_tendon_rotuliano': {
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'colgamiento en prono':'https://www.youtube.com/watch?v=syHONdwbJuw',
+    'apoyo de talon':'https://www.youtube.com/watch?v=TmIsk_X5pS4',
+    'quad sets':'https://www.youtube.com/watch?v=D0WikGbm1xs',
+    'prensa de piernas':'https://www.youtube.com/watch?v=bAfJ5Ov8jXw',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'maquina de abductores y aductores':'https://www.youtube.com/watch?v=8TebPpP8FuA',
+    'maquina de extension de cadera':'https://www.youtube.com/watch?v=lwqNo8ypMDo',
+    'silla romana':'https://www.youtube.com/watch?v=_5vQZAjtV0U',
+    'sentadilla a silla':'https://www.youtube.com/watch?v=jIKlacP8X84',
+    'zancadas laterales':'https://www.youtube.com/watch?v=MvpBUsQrt_4',
+    'peso muerto rumano':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'prensa a una pierna':'https://www.youtube.com/watch?v=39IN4b-X5ck',
+    'subidas al escalon':'https://www.youtube.com/watch?v=Bpvw8XBH7fM',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'sentadillas a una pierna':'https://www.youtube.com/watch?v=hfEb7dJYZ0E'
+  }
+};
+
+const YT_ICON = '<svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>';
+
+function linkifyExercise(text, protoId) {
+  const links = EXERCISE_LINKS[protoId];
+  if (!links) return text;
+  const lower = text.toLowerCase();
+  // Sort keys longest-first for greedy matching
+  const keys = Object.keys(links).sort((a, b) => b.length - a.length);
+  for (const key of keys) {
+    const idx = lower.indexOf(key);
+    if (idx !== -1) {
+      const matched = text.substring(idx, idx + key.length);
+      return text.substring(0, idx)
+        + '<a class="vid-link" href="' + links[key] + '" target="_blank" rel="noopener" title="Ver video del ejercicio">'
+        + matched + ' ' + YT_ICON + '</a>'
+        + text.substring(idx + key.length);
+    }
+  }
+  return text;
+}
+
+// ─────────────────────────────────────────────
 //  RENDER: PHASES
 // ─────────────────────────────────────────────
 const INTERVENTION_META = {
@@ -5185,13 +5618,13 @@ function renderPhases(protocol, semana) {
   protocol.phases.forEach((phase, idx) => {
     const isCurrent = faseActual && phase === faseActual;
     const panel = document.createElement('div');
+    // Only auto-expand current phase; all collapsed if no week known
     panel.className = 'phase-panel' + (isCurrent ? ' current expanded' : '');
     panel.innerHTML = renderPhaseHTML(phase, isCurrent, idx);
     panel.querySelector('.phase-header').onclick = () => panel.classList.toggle('expanded');
     container.appendChild(panel);
   });
 
-  // Scroll to current
   if (faseActual) {
     setTimeout(() => {
       const current = document.querySelector('.phase-panel.current');
@@ -5248,7 +5681,7 @@ function renderPhaseHTML(phase, isCurrent, idx) {
         const meta = INTERVENTION_META[cat];
         html += '<div class="intervention-group">';
         html += '<div class="intervention-group-header">' + meta.icon + ' ' + meta.label + '</div>';
-        html += '<div class="intervention-group-body"><ul class="phase-list">' + items.map(i => '<li>' + i + '</li>').join('') + '</ul></div>';
+        html += '<div class="intervention-group-body"><ul class="phase-list">' + items.map(i => '<li>' + linkifyExercise(i, activeProtocolId) + '</li>').join('') + '</ul></div>';
         html += '</div>';
       }
     });
@@ -5358,8 +5791,19 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () 
 //  EVENT LISTENERS
 // ─────────────────────────────────────────────
 document.getElementById('protocoloSelect').addEventListener('change', onProtocolChange);
-document.getElementById('fechaCirugia').addEventListener('input', actualizarSemana);
+document.getElementById('fechaCirugia').addEventListener('input', () => {
+  // If date is entered, clear manual weeks override
+  if (document.getElementById('fechaCirugia').value) {
+    document.getElementById('semanasInput').value = '';
+  }
+  actualizarSemana();
+});
 document.getElementById('semanasInput').addEventListener('input', actualizarSemana);
+document.getElementById('semanasInput').addEventListener('blur', cerrarEdicionSemanas);
+document.getElementById('semanasInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.target.blur(); }
+  if (e.key === 'Escape') { e.target.value = ''; e.target.blur(); }
+});
 document.getElementById('buscarProtocolo').addEventListener('input', function() {
   renderProtocolSelect(this.value);
 });
@@ -5371,12 +5815,8 @@ function guardarEstado() {
   if (activeProtocolId) {
     localStorage.setItem('rehab-protocol', activeProtocolId);
     localStorage.setItem('rehab-region', activeRegion);
-    localStorage.setItem('rehab-mode', inputMode);
-    if (inputMode === 'fecha') {
-      localStorage.setItem('rehab-fecha', document.getElementById('fechaCirugia').value);
-    } else {
-      localStorage.setItem('rehab-semanas', document.getElementById('semanasInput').value);
-    }
+    localStorage.setItem('rehab-fecha', document.getElementById('fechaCirugia').value);
+    localStorage.setItem('rehab-semanas', document.getElementById('semanasInput').value);
     localStorage.setItem('rehab-date', new Date().toDateString());
   }
 }
@@ -5386,20 +5826,19 @@ function restaurarEstado() {
   if (savedDate !== new Date().toDateString()) return;
   const pid = localStorage.getItem('rehab-protocol');
   const region = localStorage.getItem('rehab-region');
-  const mode = localStorage.getItem('rehab-mode');
   if (!pid) return;
   if (region) { activeRegion = region; renderRegionPills(); }
   renderProtocolSelect();
   document.getElementById('protocoloSelect').value = pid;
-  if (mode) setInputMode(mode);
-  if (mode === 'fecha') {
-    const fecha = localStorage.getItem('rehab-fecha');
-    if (fecha) document.getElementById('fechaCirugia').value = fecha;
-  } else {
-    const sem = localStorage.getItem('rehab-semanas');
-    if (sem) document.getElementById('semanasInput').value = sem;
-  }
-  onProtocolChange();
+  // Set protocol without resetting date/week
+  activeProtocolId = pid;
+  document.getElementById('dateCard').style.display = '';
+  document.getElementById('emptyState').style.display = 'none';
+  // Restore saved date/week
+  const fecha = localStorage.getItem('rehab-fecha');
+  const sem = localStorage.getItem('rehab-semanas');
+  if (fecha) document.getElementById('fechaCirugia').value = fecha;
+  if (sem) document.getElementById('semanasInput').value = sem;
   actualizarSemana();
 }
 
