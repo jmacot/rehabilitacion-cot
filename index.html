@@ -9890,6 +9890,7 @@ let activeRegion = 'todas';
 let activeProtocolId = '';
 // inputMode removed — weeks editable inline via click on badge
 let currentWeek = null;
+let shouldScrollToPhase = false;
 
 // ─────────────────────────────────────────────
 //  UTILIDADES
@@ -10880,7 +10881,8 @@ function renderPhases(protocol, semana) {
     container.appendChild(panel);
   });
 
-  if (faseActual) {
+  if (faseActual && shouldScrollToPhase) {
+    shouldScrollToPhase = false;
     setTimeout(() => {
       const current = document.querySelector('.phase-panel.current');
       if (current) current.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -11056,8 +11058,18 @@ document.getElementById('fechaCirugia').addEventListener('input', () => {
   }
   actualizarSemana();
 });
+document.getElementById('fechaCirugia').addEventListener('change', () => {
+  // Scroll to current phase only when date is fully committed (picker closed / field blurred)
+  if (document.getElementById('fechaCirugia').value) {
+    shouldScrollToPhase = true;
+    actualizarSemana();
+  }
+});
 document.getElementById('semanasInput').addEventListener('input', actualizarSemana);
-document.getElementById('semanasInput').addEventListener('blur', cerrarEdicionSemanas);
+document.getElementById('semanasInput').addEventListener('blur', () => {
+  shouldScrollToPhase = true;
+  cerrarEdicionSemanas();
+});
 document.getElementById('semanasInput').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') { e.target.blur(); }
   if (e.key === 'Escape') { e.target.value = ''; e.target.blur(); }
@@ -11097,6 +11109,7 @@ function restaurarEstado() {
   const sem = localStorage.getItem('rehab-semanas');
   if (fecha) document.getElementById('fechaCirugia').value = fecha;
   if (sem) document.getElementById('semanasInput').value = sem;
+  shouldScrollToPhase = true;
   actualizarSemana();
 }
 
@@ -11126,6 +11139,7 @@ function readUrlParams() {
         document.getElementById('semanaDisplay').style.display = 'none';
       }
       onProtocolChange();
+      shouldScrollToPhase = true;
       actualizarSemana();
       return true;
     }
