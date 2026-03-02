@@ -247,6 +247,15 @@
       display: flex; gap: 8px; align-items: center; flex-shrink: 0;
       margin-left: auto;
     }
+    .btn-goto-phase {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 6px 12px; border-radius: 8px; border: 1.5px solid var(--accent);
+      background: transparent; color: var(--accent); font-size: 11px;
+      font-weight: 600; font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .btn-goto-phase:hover { background: var(--accent); color: white; }
+    .btn-goto-phase svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; }
     .btn-clear {
       display: inline-flex; align-items: center; gap: 4px;
       padding: 6px 12px; border-radius: 8px; border: 1.5px solid var(--border);
@@ -696,6 +705,7 @@
       </div>
       <input type="number" class="week-edit-input" id="semanasInput" min="0" max="104" placeholder="0" style="display:none">
       <div class="date-actions">
+        <button class="btn-goto-phase" id="btnGotoPhase" onclick="irAFaseActual()" style="display:none"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg> Ir a fase</button>
         <button class="btn-clear" id="btnClear" onclick="limpiarFecha()" style="display:none"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg> Limpiar</button>
       </div>
     </div>
@@ -9890,7 +9900,6 @@ let activeRegion = 'todas';
 let activeProtocolId = '';
 // inputMode removed — weeks editable inline via click on badge
 let currentWeek = null;
-let shouldScrollToPhase = false;
 
 // ─────────────────────────────────────────────
 //  UTILIDADES
@@ -10075,11 +10084,20 @@ function limpiarFecha() {
   actualizarSemana();
 }
 
+function irAFaseActual() {
+  const current = document.querySelector('.phase-panel.current');
+  if (current) {
+    current.classList.add('expanded');
+    current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
 // ─────────────────────────────────────────────
 //  RENDER: RESULTS (TIMELINE + PHASES)
 // ─────────────────────────────────────────────
 function resetResults() {
   document.getElementById('dateCard').style.display = 'none';
+  document.getElementById('btnGotoPhase').style.display = 'none';
   document.getElementById('disclaimer').classList.remove('visible');
   document.getElementById('timelineWrap').classList.remove('visible');
   document.getElementById('phasesContainer').classList.remove('visible');
@@ -10881,13 +10899,8 @@ function renderPhases(protocol, semana) {
     container.appendChild(panel);
   });
 
-  if (faseActual && shouldScrollToPhase) {
-    shouldScrollToPhase = false;
-    setTimeout(() => {
-      const current = document.querySelector('.phase-panel.current');
-      if (current) current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 300);
-  }
+  // Show/hide "Ir a fase" button
+  document.getElementById('btnGotoPhase').style.display = faseActual ? '' : 'none';
 }
 
 function renderPhaseHTML(phase, isCurrent, idx) {
@@ -11058,18 +11071,8 @@ document.getElementById('fechaCirugia').addEventListener('input', () => {
   }
   actualizarSemana();
 });
-document.getElementById('fechaCirugia').addEventListener('change', () => {
-  // Scroll to current phase only when date is fully committed (picker closed / field blurred)
-  if (document.getElementById('fechaCirugia').value) {
-    shouldScrollToPhase = true;
-    actualizarSemana();
-  }
-});
 document.getElementById('semanasInput').addEventListener('input', actualizarSemana);
-document.getElementById('semanasInput').addEventListener('blur', () => {
-  shouldScrollToPhase = true;
-  cerrarEdicionSemanas();
-});
+document.getElementById('semanasInput').addEventListener('blur', cerrarEdicionSemanas);
 document.getElementById('semanasInput').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') { e.target.blur(); }
   if (e.key === 'Escape') { e.target.value = ''; e.target.blur(); }
@@ -11109,7 +11112,6 @@ function restaurarEstado() {
   const sem = localStorage.getItem('rehab-semanas');
   if (fecha) document.getElementById('fechaCirugia').value = fecha;
   if (sem) document.getElementById('semanasInput').value = sem;
-  shouldScrollToPhase = true;
   actualizarSemana();
 }
 
@@ -11139,7 +11141,6 @@ function readUrlParams() {
         document.getElementById('semanaDisplay').style.display = 'none';
       }
       onProtocolChange();
-      shouldScrollToPhase = true;
       actualizarSemana();
       return true;
     }
