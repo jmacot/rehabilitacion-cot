@@ -604,7 +604,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
-      body { padding: 10px 12px 60px; }
+      body { padding: 10px 12px 60px; overflow-x: hidden; }
       .back-home { padding: 4px 8px; font-size: 10px; top: 6px; left: 6px; }
       .app-header { padding: 32px 20px 24px; border-radius: var(--radius); }
       .app-header::before, .app-header::after { display: none; }
@@ -613,9 +613,9 @@
       .form-row { flex-direction: column; gap: 10px; }
       .form-group { width: 100%; }
       .form-group input, .form-group select { width: 100% !important; }
-      .date-card-inner { gap: 8px; flex-direction: column; align-items: stretch; position: static; }
-      .date-card-inner .form-group { max-width: none; min-width: 0; }
-      .date-card-inner .form-group input[type="date"] { min-width: 0; max-width: 100%; }
+      .date-card-inner { gap: 8px; flex-direction: column; align-items: stretch; position: static; width: 100%; }
+      .date-card-inner .form-group { max-width: none; min-width: 0; width: 100%; overflow: hidden; }
+      .date-card-inner .form-group input[type="date"] { min-width: 0; width: 100% !important; max-width: 100%; display: block; }
       .date-card-inner .week-center { position: static; transform: none; align-self: center; }
       .week-edit-input { width: 100%; }
       .date-actions { margin-left: 0; align-self: stretch; justify-content: space-between; }
