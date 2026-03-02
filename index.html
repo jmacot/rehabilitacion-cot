@@ -119,6 +119,7 @@
     }
     [data-theme="dark"] .app-header {
       background: linear-gradient(135deg, #0a1628 0%, #111827 50%, #1a2744 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
       box-shadow: 0 8px 32px rgba(0,0,0,0.4);
     }
     .app-header h1 {
@@ -608,12 +609,13 @@
       .app-header { padding: 32px 20px 24px; border-radius: var(--radius); }
       .app-header::before, .app-header::after { display: none; }
       .theme-toggle { width: 34px; height: 34px; font-size: 1rem; top: 8px; right: 8px; }
-      .card { padding: 14px; }
+      .card { padding: 14px; overflow: hidden; }
       .form-row { flex-direction: column; gap: 10px; }
       .form-group { width: 100%; }
       .form-group input, .form-group select { width: 100% !important; }
       .date-card-inner { gap: 8px; flex-direction: column; align-items: stretch; position: static; }
-      .date-card-inner .form-group { max-width: none; }
+      .date-card-inner .form-group { max-width: none; min-width: 0; }
+      .date-card-inner .form-group input[type="date"] { min-width: 0; max-width: 100%; }
       .date-card-inner .week-center { position: static; transform: none; align-self: center; }
       .week-edit-input { width: 100%; }
       .date-actions { margin-left: 0; align-self: stretch; justify-content: space-between; }
@@ -10836,6 +10838,511 @@ const EXERCISE_LINKS = {
     'subidas al escalon':'https://www.youtube.com/watch?v=Bpvw8XBH7fM',
     'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
     'sentadillas a una pierna':'https://www.youtube.com/watch?v=hfEb7dJYZ0E'
+  },
+  'cadera_core_muscle': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE'
+  },
+  'cadera_isquiotibiales_no_op': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'puente bilateral':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'sentadillas parciales':'https://www.youtube.com/watch?v=jaPzvgZFQBI'
+  },
+  'cadera_isquiotibiales_proximal': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'puente bilateral':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'sentadillas parciales':'https://www.youtube.com/watch?v=jaPzvgZFQBI'
+  },
+  'cadera_pta': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'hip hike':'https://www.youtube.com/watch?v=V6swLhJYULg',
+    'mini sentadillas':'https://www.youtube.com/watch?v=0YAFlev6AYg',
+    'peso muerto rumano':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'quad sets':'https://www.youtube.com/watch?v=D0WikGbm1xs',
+    'sentadillas a una pierna':'https://www.youtube.com/watch?v=hfEb7dJYZ0E'
+  },
+  'cadera_pubalgia': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE'
+  },
+  'codo_biceps_distal': {
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'curl de biceps':'https://www.youtube.com/watch?time_continue=6&v=LwZ2sBlOMgs',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0'
+  },
+  'codo_ucl': {
+    'curl de biceps':'https://www.youtube.com/watch?time_continue=6&v=LwZ2sBlOMgs',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0'
+  },
+  'columna_espondilosis': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE'
+  },
+  'columna_estenosis': {
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU'
+  },
+  'columna_hernia_disco': {
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'sentadillas parciales':'https://www.youtube.com/watch?v=jaPzvgZFQBI'
+  },
+  'columna_inestabilidad': {
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE'
+  },
+  'columna_lumbalgia': {
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE'
+  },
+  'hombro_acromioclavicular': {
+    'curl de biceps':'https://www.youtube.com/watch?time_continue=6&v=LwZ2sBlOMgs',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'isometricos de rotacion':'https://www.youtube.com/watch?v=r8O5zeL4ouA',
+    'isometricos de rotacion externa':'https://www.youtube.com/watch?v=r8O5zeL4ouA',
+    'isometricos de rotacion interna':'https://www.youtube.com/watch?v=r8O5zeL4ouA',
+    'pendulares':'https://www.youtube.com/watch?v=ajOYMMszqTI',
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k'
+  },
+  'hombro_bankart_anterior': {
+    'abrazo dinamico':'https://www.youtube.com/watch?v=b9QGHtHoMww',
+    'extension de hombro con banda':'https://www.youtube.com/watch?v=JvauW9ZAUSQ',
+    'extension de hombro en prono':'https://www.youtube.com/watch?time_continue=6&v=f1wcVlOFR9o',
+    'pendulares':'https://www.youtube.com/watch?v=ajOYMMszqTI',
+    'poleas':'https://www.youtube.com/watch?v=3Cs7-WLQTPU',
+    'punch frontal':'https://www.youtube.com/watch?v=AsBdDc6nd2w',
+    'punches de serrato':'https://www.youtube.com/watch?v=M-vsEfJIoWE',
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k',
+    'rotacion externa a 90 grados':'https://www.youtube.com/watch?v=obdZozRUBwA',
+    'rotacion externa en decubito lateral':'https://www.youtube.com/watch?v=2E4oVeixUXc',
+    'rotacion interna a 90 grados':'https://www.youtube.com/watch?v=s_9GcwhDLkE',
+    'sleeper stretch':'https://www.youtube.com/watch?v=IBWToThYZgo'
+  },
+  'hombro_bankart_posterior': {
+    'abrazo dinamico':'https://www.youtube.com/watch?v=b9QGHtHoMww',
+    'curl de biceps':'https://www.youtube.com/watch?time_continue=6&v=LwZ2sBlOMgs',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'pendulares':'https://www.youtube.com/watch?v=ajOYMMszqTI',
+    'poleas':'https://www.youtube.com/watch?v=3Cs7-WLQTPU',
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k'
+  },
+  'hombro_clavicula_orif': {
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'curl de biceps':'https://www.youtube.com/watch?time_continue=6&v=LwZ2sBlOMgs',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'pendulares':'https://www.youtube.com/watch?v=ajOYMMszqTI',
+    'poleas':'https://www.youtube.com/watch?v=3Cs7-WLQTPU',
+    'remo bajo':'https://www.youtube.com/watch?v=VKxyyXnB9uo',
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k',
+    'sleeper stretch':'https://www.youtube.com/watch?v=IBWToThYZgo'
+  },
+  'hombro_dorsal_ancho': {
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'curl de biceps':'https://www.youtube.com/watch?time_continue=6&v=LwZ2sBlOMgs',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc'
+  },
+  'hombro_esternoclavicular': {
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'remo bajo':'https://www.youtube.com/watch?v=VKxyyXnB9uo'
+  },
+  'hombro_humero_proximal': {
+    'curl de biceps':'https://www.youtube.com/watch?time_continue=6&v=LwZ2sBlOMgs',
+    'pendulares':'https://www.youtube.com/watch?v=ajOYMMszqTI',
+    'poleas':'https://www.youtube.com/watch?v=3Cs7-WLQTPU'
+  },
+  'hombro_latarjet': {
+    'pendulares':'https://www.youtube.com/watch?v=ajOYMMszqTI',
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k',
+    'rotacion externa a 90 grados':'https://www.youtube.com/watch?v=obdZozRUBwA',
+    'rotacion externa en decubito lateral':'https://www.youtube.com/watch?v=2E4oVeixUXc',
+    'rotacion interna a 90 grados':'https://www.youtube.com/watch?v=s_9GcwhDLkE'
+  },
+  'hombro_manguito_grande': {
+    'abrazo dinamico':'https://www.youtube.com/watch?v=b9QGHtHoMww',
+    'pendulares':'https://www.youtube.com/watch?v=ajOYMMszqTI',
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k',
+    'rotacion externa a 90 grados':'https://www.youtube.com/watch?v=obdZozRUBwA',
+    'rotacion externa en decubito lateral':'https://www.youtube.com/watch?v=2E4oVeixUXc',
+    'rotacion interna a 90 grados':'https://www.youtube.com/watch?v=s_9GcwhDLkE'
+  },
+  'hombro_manguito_no_op': {
+    'abrazo dinamico':'https://www.youtube.com/watch?v=b9QGHtHoMww',
+    'abrazo dinamico con banda':'https://www.youtube.com/watch?v=NJSkgeUnm6A',
+    'deslizamiento horizontal en mesa':'https://www.youtube.com/watch?v=fMm1EG4wKvI',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'deslizamientos en pared con banda':'https://www.youtube.com/watch?v=LIi-akh1zZc',
+    'field goals':'https://www.youtube.com/watch?v=agzYAK_ViTU',
+    'remo bajo':'https://www.youtube.com/watch?v=VKxyyXnB9uo',
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k',
+    'serie en marco de puerta':'https://www.youtube.com/watch?v=hhI-n2EhIzU',
+    'sleeper stretch':'https://www.youtube.com/watch?v=IBWToThYZgo'
+  },
+  'hombro_pectoral_mayor': {
+    'abrazo dinamico':'https://www.youtube.com/watch?v=b9QGHtHoMww',
+    'abrazo dinamico con banda':'https://www.youtube.com/watch?v=NJSkgeUnm6A',
+    'curl de biceps':'https://www.youtube.com/watch?time_continue=6&v=LwZ2sBlOMgs',
+    'deslizamientos en mesa inclinada':'https://www.youtube.com/watch?v=92NCvHp-Z9I',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'deslizamientos en pared con banda':'https://www.youtube.com/watch?v=LIi-akh1zZc',
+    'extension de hombro en prono':'https://www.youtube.com/watch?time_continue=6&v=f1wcVlOFR9o',
+    'field goals':'https://www.youtube.com/watch?v=agzYAK_ViTU',
+    'punch frontal':'https://www.youtube.com/watch?v=AsBdDc6nd2w',
+    'punches de serrato':'https://www.youtube.com/watch?v=M-vsEfJIoWE',
+    'push-up plus de rodillas':'https://www.youtube.com/watch?v=Uo-GNl3Xpo8',
+    'remo bajo':'https://www.youtube.com/watch?v=VKxyyXnB9uo',
+    'retraccion escapular':'https://www.youtube.com/watch?v=gBsR5G5Pj_k',
+    'retraccion escapular en prono':'https://www.youtube.com/watch?v=zxpgjMfxuOA',
+    'rodar pelota en pared':'https://www.youtube.com/watch?v=LMFcHrKwz1o',
+    'sleeper stretch':'https://www.youtube.com/watch?v=IBWToThYZgo'
+  },
+  'hombro_subescapular': {
+    'abrazo dinamico':'https://www.youtube.com/watch?v=b9QGHtHoMww',
+    'pendulares':'https://www.youtube.com/watch?v=ajOYMMszqTI'
+  },
+  'hombro_tenodesis_biceps': {
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'curl de biceps':'https://www.youtube.com/watch?time_continue=6&v=LwZ2sBlOMgs',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'sleeper stretch':'https://www.youtube.com/watch?v=IBWToThYZgo'
+  },
+  'hombro_trapecio_inferior': {
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'curl de biceps':'https://www.youtube.com/watch?time_continue=6&v=LwZ2sBlOMgs',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc'
+  },
+  'pie_brostrom': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'estiramiento pasivo de isquiotibiales':'https://www.youtube.com/watch?v=MCMWkks_fq0',
+    'maquina de gemelos sentado':'https://www.youtube.com/watch?v=y7CnGaTsUiY',
+    'prensa de piernas':'https://www.youtube.com/watch?v=bAfJ5Ov8jXw',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'sentadilla a silla':'https://www.youtube.com/watch?v=-ni9-gco1jo',
+    'subidas al escalon':'https://www.youtube.com/watch?v=bu0f15I9sWQ',
+    'zancadas laterales':'https://www.youtube.com/watch?v=MvpBUsQrt_4'
+  },
+  'pie_esguince_tobillo': {
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'estiramiento de soleo':'https://www.youtube.com/watch?v=J0jgWqbBR2E'
+  },
+  'rodilla_aci_femur': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'apoyo de talon':'https://www.youtube.com/watch?v=TmIsk_X5pS4',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'mini sentadillas':'https://www.youtube.com/watch?v=0YAFlev6AYg',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0'
+  },
+  'rodilla_aci_patela': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'apoyo de talon':'https://www.youtube.com/watch?v=TmIsk_X5pS4',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'mini sentadillas':'https://www.youtube.com/watch?v=0YAFlev6AYg',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0'
+  },
+  'rodilla_cintilla_iliotibial': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'puente bilateral':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'sentadilla a silla':'https://www.youtube.com/watch?v=-ni9-gco1jo'
+  },
+  'rodilla_fractura_rotula': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw'
+  },
+  'rodilla_hto': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'estiramiento de cuadriceps en prono':'https://www.youtube.com/watch?v=lglR4T94EyY',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'peso muerto rumano':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'prensa de piernas':'https://www.youtube.com/watch?v=bAfJ5Ov8jXw',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'quad sets':'https://www.youtube.com/watch?v=D0WikGbm1xs',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0'
+  },
+  'rodilla_isquiotibiales_proximal': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'estiramiento de flexores de cadera':'https://www.youtube.com/watch?v=34SlL-PPCWQ',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'puente bilateral':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'sentadillas parciales':'https://www.youtube.com/watch?v=jaPzvgZFQBI'
+  },
+  'rodilla_lca_pediatrico': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'apoyo de talon':'https://www.youtube.com/watch?v=TmIsk_X5pS4',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'hip hike':'https://www.youtube.com/watch?v=V6swLhJYULg',
+    'mini sentadillas':'https://www.youtube.com/watch?v=0YAFlev6AYg',
+    'movilizaciones patelares':'https://www.youtube.com/watch?v=ewsrnC2OTos',
+    'pasos laterales':'https://www.youtube.com/watch?v=6w_02_aHhOc',
+    'peso muerto rumano':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'puente bilateral':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'sentadilla a silla':'https://www.youtube.com/watch?v=-ni9-gco1jo',
+    'silla romana':'https://www.youtube.com/watch?v=_5vQZAjtV0U',
+    'zancadas laterales':'https://www.youtube.com/watch?v=MvpBUsQrt_4'
+  },
+  'rodilla_lcm': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'apoyo de talon':'https://www.youtube.com/watch?v=TmIsk_X5pS4',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'sentadilla a silla':'https://www.youtube.com/watch?v=-ni9-gco1jo',
+    'silla romana':'https://www.youtube.com/watch?v=_5vQZAjtV0U'
+  },
+  'rodilla_lcp': {
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'mini sentadillas':'https://www.youtube.com/watch?v=0YAFlev6AYg',
+    'movilizaciones patelares':'https://www.youtube.com/watch?v=ewsrnC2OTos',
+    'pasos laterales':'https://www.youtube.com/watch?v=6w_02_aHhOc',
+    'peso muerto rumano':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'sentadilla a silla':'https://www.youtube.com/watch?v=-ni9-gco1jo',
+    'silla romana':'https://www.youtube.com/watch?v=_5vQZAjtV0U',
+    'zancadas laterales':'https://www.youtube.com/watch?v=MvpBUsQrt_4'
+  },
+  'rodilla_meniscectomia': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'apoyo de talon':'https://www.youtube.com/watch?v=TmIsk_X5pS4',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'colgamiento en prono':'https://www.youtube.com/watch?v=syHONdwbJuw',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'estiramiento de cuadriceps en bipedestacion':'https://www.youtube.com/watch?v=j-KreYRNOCc',
+    'estiramiento de cuadriceps en prono':'https://www.youtube.com/watch?v=lglR4T94EyY',
+    'estiramiento de flexores de cadera':'https://www.youtube.com/watch?v=34SlL-PPCWQ',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'maquina de gemelos sentado':'https://www.youtube.com/watch?v=y7CnGaTsUiY',
+    'movilizaciones patelares':'https://www.youtube.com/watch?v=ewsrnC2OTos',
+    'peso muerto a una pierna':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'peso muerto rumano':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'quad sets':'https://www.youtube.com/watch?v=D0WikGbm1xs',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'sentadilla a silla':'https://www.youtube.com/watch?v=-ni9-gco1jo',
+    'sentadillas a una pierna':'https://www.youtube.com/watch?v=hfEb7dJYZ0E',
+    'sentadillas parciales':'https://www.youtube.com/watch?v=jaPzvgZFQBI',
+    'zancadas laterales':'https://www.youtube.com/watch?v=MvpBUsQrt_4'
+  },
+  'rodilla_meseta_tibial': {
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE'
+  },
+  'rodilla_microfractura': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'peso muerto rumano':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'prensa de piernas':'https://www.youtube.com/watch?v=bAfJ5Ov8jXw',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'quad sets':'https://www.youtube.com/watch?v=D0WikGbm1xs',
+    'sentadillas parciales':'https://www.youtube.com/watch?v=jaPzvgZFQBI',
+    'zancadas frontales':'https://www.youtube.com/watch?v=MvpBUsQrt_4'
+  },
+  'rodilla_mpfl': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'estiramiento de cuadriceps en prono':'https://www.youtube.com/watch?v=lglR4T94EyY',
+    'estiramiento de flexores de cadera':'https://www.youtube.com/watch?v=34SlL-PPCWQ',
+    'maquina de abductores y aductores':'https://www.youtube.com/watch?v=8TebPpP8FuA',
+    'maquina de extension de cadera':'https://www.youtube.com/watch?v=lwqNo8ypMDo',
+    'maquina de gemelos sentado':'https://www.youtube.com/watch?v=y7CnGaTsUiY',
+    'peso muerto rumano':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'prensa de piernas':'https://www.youtube.com/watch?v=bAfJ5Ov8jXw',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'puente bilateral':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'quad sets':'https://www.youtube.com/watch?v=D0WikGbm1xs',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'sentadilla a silla':'https://www.youtube.com/watch?v=-ni9-gco1jo',
+    'zancadas laterales':'https://www.youtube.com/watch?v=MvpBUsQrt_4'
+  },
+  'rodilla_mpfl_pediatrico': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'apoyo de talon':'https://www.youtube.com/watch?v=TmIsk_X5pS4',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'mini sentadillas':'https://www.youtube.com/watch?v=0YAFlev6AYg',
+    'movilizaciones patelares':'https://www.youtube.com/watch?v=ewsrnC2OTos',
+    'peso muerto rumano':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'puente bilateral':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'sentadilla a silla':'https://www.youtube.com/watch?v=-ni9-gco1jo',
+    'silla romana':'https://www.youtube.com/watch?v=_5vQZAjtV0U',
+    'zancadas laterales':'https://www.youtube.com/watch?v=MvpBUsQrt_4'
+  },
+  'rodilla_ocd_pediatrico': {
+    'apoyo de talon':'https://www.youtube.com/watch?v=TmIsk_X5pS4',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'estiramiento pasivo de isquiotibiales':'https://www.youtube.com/watch?v=MCMWkks_fq0',
+    'peso muerto rumano':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'sentadillas bilaterales':'https://www.youtube.com/watch?v=-ni9-gco1jo',
+    'zancadas laterales':'https://www.youtube.com/watch?v=MvpBUsQrt_4'
+  },
+  'rodilla_ptr': {
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8'
+  },
+  'rodilla_sd_patelofemoral': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'puente bilateral':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'sentadilla a silla':'https://www.youtube.com/watch?v=-ni9-gco1jo'
+  },
+  'rodilla_sutura_meniscal': {
+    'abduccion de cadera':'https://www.youtube.com/watch?v=4dPsw7-MrHk',
+    'apoyo de talon':'https://www.youtube.com/watch?v=TmIsk_X5pS4',
+    'bicicleta estatica':'https://www.youtube.com/watch?v=h53EF1R7cBE',
+    'bombeos de tobillo':'https://www.youtube.com/watch?v=VCK_K3kms-Q',
+    'clamshell':'https://www.youtube.com/watch?v=uwx-xiSmpU0',
+    'colgamiento en prono':'https://www.youtube.com/watch?v=syHONdwbJuw',
+    'curl de isquiotibiales':'https://www.youtube.com/watch?v=O7ScSob1c-A',
+    'deslizamientos de talon':'https://www.youtube.com/watch?v=lab6d_vBRjU',
+    'deslizamientos en pared':'https://www.youtube.com/watch?v=D351y9ecIwc',
+    'elevacion de pierna recta':'https://www.youtube.com/watch?v=J6JgHgVNrZ8',
+    'elevaciones de talon':'https://www.youtube.com/watch?v=nnPGrBLNlaw',
+    'estiramiento de cuadriceps en bipedestacion':'https://www.youtube.com/watch?v=j-KreYRNOCc',
+    'estiramiento de cuadriceps en prono':'https://www.youtube.com/watch?v=lglR4T94EyY',
+    'estiramiento de flexores de cadera':'https://www.youtube.com/watch?v=34SlL-PPCWQ',
+    'estiramiento de gastrocnemio':'https://www.youtube.com/watch?v=wC5zhTtBH0s',
+    'flexo-extension de rodilla asistida':'https://www.youtube.com/watch?v=Ci_iEOLTLzI',
+    'hip hike':'https://www.youtube.com/watch?v=V6swLhJYULg',
+    'maquina de extension de cadera':'https://www.youtube.com/watch?v=lwqNo8ypMDo',
+    'maquina de gemelos sentado':'https://www.youtube.com/watch?v=y7CnGaTsUiY',
+    'mini sentadillas':'https://www.youtube.com/watch?v=0YAFlev6AYg',
+    'movilizaciones patelares':'https://www.youtube.com/watch?v=ewsrnC2OTos',
+    'peso muerto rumano':'https://www.youtube.com/watch?v=fYxfP8irrmo',
+    'puente':'https://www.youtube.com/watch?v=rVduR4q3mnE',
+    'quad sets':'https://www.youtube.com/watch?v=D0WikGbm1xs',
+    'retro':'https://www.youtube.com/watch?v=ExtadzBC3s0',
+    'sentadilla a silla':'https://www.youtube.com/watch?v=-ni9-gco1jo',
+    'sentadillas a una pierna':'https://www.youtube.com/watch?v=hfEb7dJYZ0E',
+    'silla romana':'https://www.youtube.com/watch?v=_5vQZAjtV0U',
+    'zancadas laterales':'https://www.youtube.com/watch?v=MvpBUsQrt_4'
   }
 };
 
