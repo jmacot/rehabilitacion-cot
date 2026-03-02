@@ -222,7 +222,7 @@
       font-family: 'Inter', sans-serif; font-weight: 700;
       font-size: 14px; white-space: nowrap; flex-shrink: 0;
       min-height: 42px; cursor: pointer; transition: all 0.2s;
-      user-select: none;
+      user-select: none; align-self: center;
     }
     .week-display:hover { opacity: 0.85; transform: scale(1.03); }
     .week-display.empty {
@@ -237,7 +237,7 @@
       border: 2px solid var(--accent); font-size: 1.2rem; font-weight: 700;
       font-family: 'Lora', serif; text-align: center;
       color: var(--accent); background: var(--surface);
-      outline: none; -moz-appearance: textfield;
+      outline: none; -moz-appearance: textfield; align-self: center;
     }
     .week-edit-input::-webkit-inner-spin-button,
     .week-edit-input::-webkit-outer-spin-button { -webkit-appearance: none; }
@@ -245,7 +245,7 @@
     /* ── DATE ACTIONS ── */
     .date-actions {
       display: flex; gap: 8px; align-items: center; flex-shrink: 0;
-      margin-left: auto;
+      margin-left: auto; align-self: center;
     }
     .btn-goto-phase {
       display: inline-flex; align-items: center; gap: 4px;
@@ -609,7 +609,7 @@
       .form-group input, .form-group select { width: 100% !important; }
       .date-card-inner { gap: 8px; flex-direction: column; align-items: stretch; }
       .date-card-inner .form-group { max-width: none; }
-      .week-display { align-self: flex-start; }
+      .week-display { align-self: center; }
       .week-edit-input { width: 100%; }
       .date-actions { margin-left: 0; }
       .phase-name { font-size: 0.85rem; }
