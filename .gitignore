@@ -19,12 +19,12 @@ proto_links.json
 youtube_links.json
 youtube_links.txt
 
-# Directorios de protocolos originales (datos fuente)
-Acondicionamiento deportivo/
-Cabeza, cuello, columna/
-Cadera/
-Codo/
-Hombro/
-Muñeca y mano/
-Pie y tobillo/
-Rodilla/
+# Directorios de protocolos originales (datos fuente, solo raiz)
+/Acondicionamiento deportivo/
+/Cabeza, cuello, columna/
+/Cadera/
+/Codo/
+/Hombro/
+/Muñeca y mano/
+/Pie y tobillo/
+/Rodilla/

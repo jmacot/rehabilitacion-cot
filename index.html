@@ -272,6 +272,9 @@
       animation: fadeInUp 0.4s ease-out;
     }
     .timeline-wrap.visible { display: block; }
+    @media (min-width: 601px) {
+      .timeline-wrap { margin-left: -60px; margin-right: -60px; }
+    }
 
     /* ── D3 CHARTS ── */
     .d3-chart-wrap { width: 100%; overflow: visible; margin-bottom: 6px; }
@@ -10311,11 +10314,11 @@ function renderGantt(protocol, semana) {
   const totalWeeks = protocol.totalWeeks || protocol.phases[protocol.phases.length - 1].weekEnd;
   const nPhases = protocol.phases.length;
   const isMobile = window.innerWidth <= 600;
-  const rowH = isMobile ? 24 : 28;
-  const gap = isMobile ? 3 : 4;
-  const labelW = isMobile ? 70 : 130;
+  const rowH = isMobile ? 24 : 38;
+  const gap = isMobile ? 3 : 6;
+  const labelW = isMobile ? 70 : 140;
   const W = 800;
-  const pad = { left: labelW + 8, right: isMobile ? 8 : 16, top: 6, bottom: 20 };
+  const pad = { left: labelW + 8, right: isMobile ? 8 : 16, top: 10, bottom: 28 };
   const chartW = W - pad.left - pad.right;
   const H = pad.top + nPhases * (rowH + gap) - gap + pad.bottom;
 
@@ -10341,7 +10344,7 @@ function renderGantt(protocol, semana) {
     svg.append('text')
       .attr('x', pad.left - 6).attr('y', y + rowH / 2 + (isMobile ? 0 : 1))
       .attr('text-anchor', 'end').attr('dominant-baseline', 'middle')
-      .attr('font-size', isMobile ? 11 : 10).attr('font-family', 'Inter, sans-serif')
+      .attr('font-size', isMobile ? 11 : 12).attr('font-family', 'Inter, sans-serif')
       .attr('font-weight', isCurrent ? 700 : 400)
       .attr('fill', isCurrent ? theme.accentColor : theme.textColor)
       .text(shortLabel);
@@ -11148,7 +11151,6 @@ if (!readUrlParams()) {
   } else {
     selectModulo('ejercicios');
   }
-  restaurarEstado();
 }
 </script>
 </body>
