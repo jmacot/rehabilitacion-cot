@@ -214,6 +214,11 @@
       width: 100%; padding: 10px 14px; font-size: 15px;
     }
 
+    /* ── WEEK ROW (centered) ── */
+    .week-row {
+      display: flex; justify-content: center; align-items: center;
+    }
+
     /* ── WEEK DISPLAY (prominent) ── */
     .week-display {
       display: flex; align-items: center; gap: 6px;
@@ -222,7 +227,7 @@
       font-family: 'Inter', sans-serif; font-weight: 700;
       font-size: 14px; white-space: nowrap; flex-shrink: 0;
       min-height: 42px; cursor: pointer; transition: all 0.2s;
-      user-select: none; align-self: center;
+      user-select: none;
     }
     .week-display:hover { opacity: 0.85; transform: scale(1.03); }
     .week-display.empty {
@@ -237,7 +242,7 @@
       border: 2px solid var(--accent); font-size: 1.2rem; font-weight: 700;
       font-family: 'Lora', serif; text-align: center;
       color: var(--accent); background: var(--surface);
-      outline: none; -moz-appearance: textfield; align-self: center;
+      outline: none; -moz-appearance: textfield;
     }
     .week-edit-input::-webkit-inner-spin-button,
     .week-edit-input::-webkit-outer-spin-button { -webkit-appearance: none; }
@@ -245,7 +250,7 @@
     /* ── DATE ACTIONS ── */
     .date-actions {
       display: flex; gap: 8px; align-items: center; flex-shrink: 0;
-      margin-left: auto; align-self: center;
+      margin-left: auto;
     }
     .btn-goto-phase {
       display: inline-flex; align-items: center; gap: 4px;
@@ -609,7 +614,6 @@
       .form-group input, .form-group select { width: 100% !important; }
       .date-card-inner { gap: 8px; flex-direction: column; align-items: stretch; }
       .date-card-inner .form-group { max-width: none; }
-      .week-display { align-self: center; }
       .week-edit-input { width: 100%; }
       .date-actions { margin-left: 0; }
       .phase-name { font-size: 0.85rem; }
@@ -700,14 +704,16 @@
         <label for="fechaCirugia">Fecha de cirugia/lesion</label>
         <input type="date" id="fechaCirugia">
       </div>
-      <div class="week-display empty" id="semanaDisplay" onclick="editarSemanas()" title="Clic para introducir semanas manualmente">
-        <span class="week-num">--</span> sem
-      </div>
-      <input type="number" class="week-edit-input" id="semanasInput" min="0" max="104" placeholder="0" style="display:none">
       <div class="date-actions">
         <button class="btn-goto-phase" id="btnGotoPhase" onclick="irAFaseActual()" style="display:none"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg> Ir a fase</button>
         <button class="btn-clear" id="btnClear" onclick="limpiarFecha()" style="display:none"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg> Limpiar</button>
       </div>
+    </div>
+    <div class="week-row">
+      <div class="week-display empty" id="semanaDisplay" onclick="editarSemanas()" title="Clic para introducir semanas manualmente">
+        <span class="week-num">--</span> sem
+      </div>
+      <input type="number" class="week-edit-input" id="semanasInput" min="0" max="104" placeholder="0" style="display:none">
     </div>
   </div>
 
