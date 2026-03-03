@@ -76,7 +76,7 @@
     input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     input[type=number] { -moz-appearance: textfield; }
 
-    .app-container { max-width: 900px; margin: 0 auto; }
+    .app-container { max-width: 900px; margin: 0 auto; overflow: hidden; }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeInUp {
@@ -609,13 +609,13 @@
       .app-header { padding: 32px 20px 24px; border-radius: var(--radius); }
       .app-header::before, .app-header::after { display: none; }
       .theme-toggle { width: 34px; height: 34px; font-size: 1rem; top: 8px; right: 8px; }
-      .card { padding: 14px; overflow: hidden; }
+      .card { padding: 14px; overflow: hidden; max-width: 100%; }
       .form-row { flex-direction: column; gap: 10px; }
       .form-group { width: 100%; }
       .form-group input, .form-group select { width: 100% !important; }
-      .date-card-inner { gap: 8px; flex-direction: column; align-items: stretch; position: static; width: 100%; }
-      .date-card-inner .form-group { max-width: none; min-width: 0; width: 100%; overflow: hidden; }
-      .date-card-inner .form-group input[type="date"] { min-width: 0; width: 100% !important; max-width: 100%; display: block; }
+      .date-card-inner { gap: 8px; flex-direction: column; align-items: stretch; position: static; width: 100%; overflow: hidden; }
+      .date-card-inner .form-group { max-width: 100%; min-width: 0; width: 100%; overflow: hidden; }
+      .date-card-inner .form-group input[type="date"] { min-width: 0; width: 100% !important; max-width: calc(100vw - 60px); display: block; box-sizing: border-box; font-size: 14px; padding: 10px 8px; -webkit-min-logical-width: 0; }
       .date-card-inner .week-center { position: static; transform: none; align-self: center; }
       .week-edit-input { width: 100%; }
       .date-actions { margin-left: 0; align-self: stretch; justify-content: space-between; }
