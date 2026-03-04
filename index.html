@@ -601,6 +601,39 @@
       background: var(--surface2);
     }
     .ej-action-custom svg { stroke: currentColor; }
+    .ej-search-wrap {
+      margin-bottom: 10px;
+      animation: fadeInUp 0.6s ease-out 0.1s both;
+    }
+    .ej-search-wrap .form-group { margin: 0; }
+    .ej-search-wrap input[type="search"] {
+      border: 1.5px solid var(--border); border-radius: 8px;
+      padding: 12px 16px; font-size: 14px; width: 100%;
+      font-family: 'Inter', Arial, sans-serif; color: var(--text);
+      background: var(--surface); transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .ej-search-wrap input[type="search"]:focus {
+      outline: none; border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(26,58,92,0.10);
+    }
+    .ej-region-header {
+      font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--ej-hdr-color); background: var(--ej-hdr-bg);
+      padding: 6px 14px; border-radius: 8px;
+      margin-top: 8px; margin-bottom: 2px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ej-region-header:first-child { margin-top: 0; }
+    .ej-region-count {
+      font-size: 10px; opacity: 0.7;
+      background: rgba(0,0,0,0.06); padding: 1px 6px; border-radius: 999px;
+    }
+    [data-theme="dark"] .ej-region-count { background: rgba(255,255,255,0.1); }
+    .ej-empty {
+      text-align: center; padding: 32px 16px;
+      color: var(--text-light); font-size: 14px;
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
@@ -666,6 +699,12 @@
   <!--  SECCION: EJERCICIOS (SERMEF)              -->
   <!-- ═══════════════════════════════════════════ -->
   <div id="seccion-ejercicios" class="seccion">
+    <div id="ejSearchWrap" class="ej-search-wrap">
+      <div class="form-group">
+        <label>Buscar ejercicio</label>
+        <input type="search" id="buscarEjercicio" placeholder="Escriba para filtrar...">
+      </div>
+    </div>
     <div class="ej-layout">
       <nav class="ej-sidebar">
         <div id="ejerciciosRegionPills" class="ej-pills"></div>
@@ -777,6 +816,7 @@ function selectModulo(moduloId) {
 //  EJERCICIOS — DATOS SERMEF
 // ─────────────────────────────────────────────
 const EJ_COLORES = {
+  todos:        { bg: '#eef2f7', fg: '#1a3a5c', pill: '#1a3a5c', pillDark: '#93c5fd', pillDarkBg: '#1e3a5f' },
   hombro:       { bg: '#dbeafe', fg: '#2563eb', pill: '#2563eb', pillDark: '#60a5fa', pillDarkBg: '#1e3a5f' },
   codo:         { bg: '#fce7f3', fg: '#db2777', pill: '#db2777', pillDark: '#f472b6', pillDarkBg: '#4a1942' },
   columna:      { bg: '#e0e7ff', fg: '#6366f1', pill: '#6366f1', pillDark: '#a5b4fc', pillDarkBg: '#312e81' },
@@ -829,12 +869,24 @@ const EJERCICIOS_REGIONES = [
 // ─────────────────────────────────────────────
 //  EJERCICIOS — FUNCIONES
 // ─────────────────────────────────────────────
-let activeEjRegion = 'hombro';
+let activeEjRegion = 'todos';
+let ejSearchFilter = '';
 
 function renderEjerciciosPills() {
   const container = document.getElementById('ejerciciosRegionPills');
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  container.innerHTML = EJERCICIOS_REGIONES.map(region => {
+  const totalCount = EJERCICIOS_REGIONES.reduce((s, r) => s + r.pdfs.length, 0);
+  const cTodos = EJ_COLORES.todos;
+  const isTodosActive = activeEjRegion === 'todos';
+  let todosStyle = '';
+  if (isTodosActive) {
+    todosStyle = `style="background:${isDark ? cTodos.pillDarkBg : cTodos.pill};border-color:${isDark ? cTodos.pillDark : cTodos.pill};color:${isDark ? cTodos.pillDark : 'white'}"`;
+  }
+  let html = `<button class="ej-pill${isTodosActive ? ' active' : ''}"
+    data-ejregion="todos" onclick="selectEjRegion('todos')" ${todosStyle}>
+    Todos <span class="count">${totalCount}</span>
+  </button>`;
+  html += EJERCICIOS_REGIONES.map(region => {
     const c = EJ_COLORES[region.id];
     const isActive = region.id === activeEjRegion;
     let style = '';
@@ -846,10 +898,15 @@ function renderEjerciciosPills() {
       ${region.label} <span class="count">${region.pdfs.length}</span>
     </button>`;
   }).join('');
+  container.innerHTML = html;
 }
 
 function selectEjRegion(regionId) {
   activeEjRegion = regionId;
+  if (regionId !== 'todos') {
+    document.getElementById('buscarEjercicio').value = '';
+    ejSearchFilter = '';
+  }
   renderEjerciciosPills();
   renderEjerciciosCards();
 }
@@ -868,20 +925,19 @@ function toggleEjSubgroup(idx) {
 
 function renderEjerciciosCards() {
   const grid = document.getElementById('ejerciciosGrid');
-  const region = EJERCICIOS_REGIONES.find(r => r.id === activeEjRegion);
-  if (!region) { grid.innerHTML = ''; return; }
-
-  const c = EJ_COLORES[region.id];
+  document.getElementById('ejSearchWrap').style.display = activeEjRegion === 'todos' ? '' : 'none';
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const iconBg = isDark ? c.fg + '18' : c.bg;
-  const iconStroke = isDark ? c.pillDark : c.fg;
-
   const svgChevron = `<svg class="ej-chevron" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>`;
   const svgDoc = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`;
   const svgPencil = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>`;
 
-  grid.innerHTML = region.pdfs.map((pdf, i) => `
-    <div class="ejercicio-card" data-ej-idx="${i}" onclick="toggleEjSubgroup(${i})" style="--ej-color:${c.fg}">
+  const filterNorm = normalizar(ejSearchFilter);
+
+  function buildCard(pdf, idx, c) {
+    const iconBg = isDark ? c.fg + '18' : c.bg;
+    const iconStroke = isDark ? c.pillDark : c.fg;
+    return `
+    <div class="ejercicio-card" data-ej-idx="${idx}" onclick="toggleEjSubgroup(${idx})" style="--ej-color:${c.fg}">
       <div class="ej-icon" style="background:${iconBg}">
         <svg viewBox="0 0 24 24" style="stroke:${iconStroke}" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
@@ -892,15 +948,38 @@ function renderEjerciciosCards() {
       </div>
       ${svgChevron}
     </div>
-    <div class="ej-subgroup" id="ej-sub-${i}" style="--ej-color:${c.fg}">
+    <div class="ej-subgroup" id="ej-sub-${idx}" style="--ej-color:${c.fg}">
       <a class="ej-action ej-action-pdf" href="${pdf.archivo}" target="_blank" rel="noopener" style="color:${c.fg};border-color:${c.fg}" onmouseover="this.style.background='${c.fg}';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='${c.fg}'">
         ${svgDoc} Protocolo
       </a>
       <a class="ej-action ej-action-custom" href="${pdf.enlace}" target="_blank" rel="noopener">
         ${svgPencil} Personalizar programa
       </a>
-    </div>
-  `).join('');
+    </div>`;
+  }
+
+  if (activeEjRegion === 'todos') {
+    let html = '';
+    let globalIdx = 0;
+    EJERCICIOS_REGIONES.forEach(region => {
+      const c = EJ_COLORES[region.id];
+      const filtered = filterNorm
+        ? region.pdfs.filter(p => normalizar(p.nombre).includes(filterNorm))
+        : region.pdfs;
+      if (filtered.length === 0) return;
+      html += `<div class="ej-region-header" style="--ej-hdr-color:${isDark ? c.pillDark : c.fg};--ej-hdr-bg:${isDark ? c.fg + '18' : c.bg}">${region.label}</div>`;
+      filtered.forEach(pdf => { html += buildCard(pdf, globalIdx++, c); });
+    });
+    if (!html) {
+      html = `<div class="ej-empty">Sin resultados para "${ejSearchFilter}"</div>`;
+    }
+    grid.innerHTML = html;
+  } else {
+    const region = EJERCICIOS_REGIONES.find(r => r.id === activeEjRegion);
+    if (!region) { grid.innerHTML = ''; return; }
+    const c = EJ_COLORES[region.id];
+    grid.innerHTML = region.pdfs.map((pdf, i) => buildCard(pdf, i, c)).join('');
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -11593,6 +11672,10 @@ document.getElementById('semanasInput').addEventListener('keydown', (e) => {
 });
 document.getElementById('buscarProtocolo').addEventListener('input', function() {
   renderProtocolSelect(this.value);
+});
+document.getElementById('buscarEjercicio').addEventListener('input', function() {
+  ejSearchFilter = this.value;
+  renderEjerciciosCards();
 });
 
 // ─────────────────────────────────────────────
