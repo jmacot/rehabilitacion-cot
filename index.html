@@ -856,7 +856,7 @@ const EJERCICIOS_REGIONES = [
   ]},
   { id: 'cadera', label: 'Cadera', pdfs: [
     { nombre: 'Coxartrosis', archivo: 'SERMEF/Cadera/Coxartrosis.pdf', enlace: 'https://ejercicios.sermef.es/#/programas/especifico?zona=6343e684d1c859edf64311cd&cuadro=6343e558d1c859edf64311c0' },
-    { nombre: 'Síndrome de dolor en trocánter mayor', archivo: 'SERMEF/Cadera/Síndrome de dolor en trocánter mayor.pdf', enlace: 'https://ejercicios.sermef.es/#/programas/especifico?zona=6343e684d1c859edf64311cd&cuadro=6343e56dd1c859edf64311c2' },
+    { nombre: 'Síndrome de dolor en trocánter mayor (GTPS)', archivo: 'SERMEF/Cadera/Síndrome de dolor en trocánter mayor.pdf', archivo2: 'SERMEF/Cadera/Ejercicios GTPS.pdf', enlace: 'https://ejercicios.sermef.es/#/programas/especifico?zona=6343e684d1c859edf64311cd&cuadro=6343e56dd1c859edf64311c2' },
     { nombre: 'Cadera en resorte', archivo: 'SERMEF/Cadera/Cadera en resorte.pdf', enlace: 'https://ejercicios.sermef.es/#/programas/especifico?zona=6343e684d1c859edf64311cd&cuadro=6343e564d1c859edf64311c1' },
     { nombre: 'Fractura de cadera', archivo: 'SERMEF/Cadera/Fractura de Cadera.pdf', enlace: 'https://ejercicios.sermef.es/#/programas/especifico?zona=6343e684d1c859edf64311cd&cuadro=6617fa5089406ada9631fabd' },
   ]},
@@ -952,9 +952,12 @@ function renderEjerciciosCards() {
       <a class="ej-action ej-action-pdf" href="${pdf.archivo}" target="_blank" rel="noopener" style="color:${c.fg};border-color:${c.fg}" onmouseover="this.style.background='${c.fg}';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='${c.fg}'">
         ${svgDoc} Protocolo
       </a>
-      <a class="ej-action ej-action-custom" href="${pdf.enlace}" target="_blank" rel="noopener">
+      ${pdf.archivo2 ? `<a class="ej-action ej-action-pdf" href="${pdf.archivo2}" target="_blank" rel="noopener" style="color:${c.fg};border-color:${c.fg}" onmouseover="this.style.background='${c.fg}';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='${c.fg}'">
+        ${svgDoc} Protocolo 2
+      </a>` : ''}
+      ${pdf.enlace ? `<a class="ej-action ej-action-custom" href="${pdf.enlace}" target="_blank" rel="noopener">
         ${svgPencil} Personalizar programa
-      </a>
+      </a>` : ''}
     </div>`;
   }
 
