@@ -770,6 +770,15 @@
   <!--  SECCION: POSTOPERATORIO                    -->
   <!-- ═══════════════════════════════════════════ -->
   <div id="seccion-postoperatorio" class="seccion">
+    <nav class="cat-nav" style="animation:fadeInUp 0.6s ease-out 0.05s both">
+      <div class="cat-pills" id="postopRegionPills"></div>
+    </nav>
+    <div class="ej-search-wrap" id="postopSearchWrap">
+      <div class="form-group">
+        <label>Buscar protocolo</label>
+        <input type="search" id="buscarPostop" placeholder="Escriba para filtrar...">
+      </div>
+    </div>
     <div class="postop-grid" id="postopGrid"></div>
   </div>
 
@@ -1055,48 +1064,63 @@ function renderEjerciciosCards() {
 // ─────────────────────────────────────────────
 //  POSTOPERATORIO
 // ─────────────────────────────────────────────
+const POSTOP_COLORES = {
+  todas:   { fg: '#7c3aed', darkFg: '#a78bfa', darkBg: '#2e1065' },
+  cadera:  { fg: '#d97706', darkFg: '#fbbf24', darkBg: '#3b2a10' },
+  rodilla: { fg: '#16a34a', darkFg: '#4ade80', darkBg: '#14352a' },
+};
+
+const POSTOP_REGIONES = [
+  { id: 'todas', label: 'Todas' },
+  { id: 'cadera', label: 'Cadera' },
+  { id: 'rodilla', label: 'Rodilla' },
+];
+
 const POSTOP_DOCS = [
   {
-    nombre: 'Prótesis Total de Cadera (PTC)',
+    nombre: 'Prótesis Total de Cadera (PTC)', region: 'cadera',
     archivos: [
       { label: 'Protocolo PTC Dr. Pereira', archivo: 'Postoperatorio/PTC.pdf' },
       { label: 'Protocolo PTC 2', archivo: 'Postoperatorio/[CAD] Recomendaciones PTC para el paciente.pdf' },
     ]
   },
   {
-    nombre: 'Prótesis Total de Rodilla (PTR)',
+    nombre: 'Prótesis Total de Rodilla (PTR)', region: 'rodilla',
     archivos: [
       { label: 'Protocolo PTR Dr. Martín', archivo: 'Postoperatorio/POSTOP PTR.pdf' },
       { label: 'Protocolo PTR 2', archivo: 'Postoperatorio/PTR.pdf' },
     ]
   },
   {
-    nombre: 'Prótesis Unicompartimental (PUC)',
+    nombre: 'Prótesis Unicompartimental (PUC)', region: 'rodilla',
     archivos: [
       { label: 'Protocolo PUC', archivo: 'Postoperatorio/PUC.pdf' },
     ]
   },
   {
-    nombre: 'Ligamento Cruzado Anterior (LCA)',
+    nombre: 'Ligamento Cruzado Anterior (LCA)', region: 'rodilla',
     archivos: [
       { label: 'Protocolo LCA', archivo: 'Postoperatorio/LCA.pdf' },
       { label: 'LCA + Sutura Meniscal', archivo: 'Postoperatorio/LCA + Sutura Meniscal.pdf' },
     ]
   },
   {
-    nombre: 'Sutura Meniscal',
+    nombre: 'Sutura Meniscal', region: 'rodilla',
     archivos: [
       { label: 'Protocolo Sutura Meniscal', archivo: 'Postoperatorio/Sutura Meniscal.pdf' },
     ]
   },
   {
-    nombre: 'Artroscopia de Rodilla',
+    nombre: 'Artroscopia de Rodilla', region: 'rodilla',
     archivos: [
       { label: 'Recomendaciones tras artroscopia', archivo: 'Postoperatorio/RECOMENDACIONES TRAS CAR .pdf' },
       { label: 'Protocolo Artroscopia 2', archivo: 'Postoperatorio/Artroscopia Rodilla.pdf' },
     ]
   },
 ];
+
+let activePostopRegion = 'todas';
+let postopSearchFilter = '';
 
 function togglePostopSubgroup(idx) {
   const sub = document.getElementById('postop-sub-' + idx);
@@ -1110,6 +1134,30 @@ function togglePostopSubgroup(idx) {
   }
 }
 
+function renderPostopPills() {
+  const container = document.getElementById('postopRegionPills');
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  container.innerHTML = POSTOP_REGIONES.map(r => {
+    const count = r.id === 'todas' ? POSTOP_DOCS.length : POSTOP_DOCS.filter(d => d.region === r.id).length;
+    if (count === 0 && r.id !== 'todas') return '';
+    const c = POSTOP_COLORES[r.id];
+    const isActive = activePostopRegion === r.id;
+    let style = '';
+    if (isActive) {
+      style = `style="background:${isDark ? c.darkBg : c.fg};border-color:${isDark ? c.darkFg : c.fg};color:${isDark ? c.darkFg : 'white'}"`;
+    }
+    return `<button class="cat-pill${isActive ? ' active' : ''}" onclick="selectPostopRegion('${r.id}')" ${style}>
+      ${r.label} <span class="cat-count">${count}</span>
+    </button>`;
+  }).join('');
+}
+
+function selectPostopRegion(regionId) {
+  activePostopRegion = regionId;
+  renderPostopPills();
+  renderPostopCards();
+}
+
 function renderPostopCards() {
   const grid = document.getElementById('postopGrid');
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -1119,7 +1167,21 @@ function renderPostopCards() {
   const svgChevron = `<svg class="postop-chevron" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>`;
   const svgDoc = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`;
 
-  grid.innerHTML = POSTOP_DOCS.map((doc, idx) => {
+  let docs = POSTOP_DOCS;
+  if (activePostopRegion !== 'todas') {
+    docs = docs.filter(d => d.region === activePostopRegion);
+  }
+  const filterNorm = normalizar(postopSearchFilter);
+  if (filterNorm) {
+    docs = docs.filter(d => normalizar(d.nombre).includes(filterNorm));
+  }
+
+  if (docs.length === 0) {
+    grid.innerHTML = `<div class="ej-empty">Sin resultados${postopSearchFilter ? ' para "' + postopSearchFilter + '"' : ''}</div>`;
+    return;
+  }
+
+  grid.innerHTML = docs.map((doc, idx) => {
     const fileButtons = doc.archivos.map(f => `
       <a class="ej-action ej-action-pdf" href="${f.archivo}" target="_blank" rel="noopener" style="color:${color};border-color:${color}" onmouseover="this.style.background='${color}';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='${color}'">
         ${svgDoc} ${f.label}
@@ -11779,6 +11841,7 @@ function applyTheme(dark) {
   // Re-render ejercicios and postop with new theme colors
   renderEjerciciosPills();
   renderEjerciciosCards();
+  renderPostopPills();
   renderPostopCards();
 }
 
@@ -11839,6 +11902,11 @@ document.getElementById('buscarProtocolo').addEventListener('input', function() 
 document.getElementById('buscarEjercicio').addEventListener('input', function() {
   ejSearchFilter = this.value;
   renderEjerciciosCards();
+});
+
+document.getElementById('buscarPostop').addEventListener('input', function() {
+  postopSearchFilter = this.value;
+  renderPostopCards();
 });
 
 // ─────────────────────────────────────────────
@@ -11916,6 +11984,7 @@ renderRegionPills();
 renderProtocolSelect();
 renderEjerciciosPills();
 renderEjerciciosCards();
+renderPostopPills();
 renderPostopCards();
 
 // Restore module or default to ejercicios
