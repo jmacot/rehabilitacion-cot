@@ -512,6 +512,13 @@
     [data-theme="dark"] .modulo-pill.active[data-modulo="rehabilitacion"] {
       background: var(--accent-light); border-color: var(--accent); color: var(--accent);
     }
+    .modulo-pill.active[data-modulo="postoperatorio"] {
+      background: #7c3aed; border-color: #7c3aed; color: white;
+      box-shadow: 0 4px 16px rgba(124,58,237,0.25);
+    }
+    [data-theme="dark"] .modulo-pill.active[data-modulo="postoperatorio"] {
+      background: #2e1065; border-color: #a78bfa; color: #a78bfa;
+    }
     .modulo-pill.active svg { opacity: 1; }
 
     /* ── EJERCICIOS SERMEF ── */
@@ -1052,8 +1059,8 @@ const POSTOP_DOCS = [
   {
     nombre: 'Prótesis Total de Cadera (PTC)',
     archivos: [
-      { label: 'Recomendaciones para el paciente', archivo: 'Postoperatorio/[CAD] Recomendaciones PTC para el paciente.pdf' },
       { label: 'Protocolo PTC Dr. Pereira', archivo: 'Postoperatorio/PTC.pdf' },
+      { label: 'Protocolo PTC 2', archivo: 'Postoperatorio/[CAD] Recomendaciones PTC para el paciente.pdf' },
     ]
   },
   {
@@ -1106,9 +1113,9 @@ function togglePostopSubgroup(idx) {
 function renderPostopCards() {
   const grid = document.getElementById('postopGrid');
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const color = isDark ? '#34d399' : '#059669';
-  const iconBg = isDark ? 'rgba(5,150,105,0.15)' : '#d1fae5';
-  const iconStroke = isDark ? '#34d399' : '#059669';
+  const color = isDark ? '#a78bfa' : '#7c3aed';
+  const iconBg = isDark ? 'rgba(124,58,237,0.15)' : '#ede9fe';
+  const iconStroke = isDark ? '#a78bfa' : '#7c3aed';
   const svgChevron = `<svg class="postop-chevron" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>`;
   const svgDoc = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`;
 
