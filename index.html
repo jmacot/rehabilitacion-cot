@@ -293,7 +293,7 @@
 
     /* ── D3 CHARTS ── */
     .d3-chart-wrap { width: 100%; overflow: visible; margin-bottom: 6px; }
-    .d3-chart-wrap svg { display: block; width: 100%; height: auto; }
+    .d3-chart-wrap svg { display: block; width: 100%; height: auto; max-width: 100%; }
     .d3-tooltip {
       position: fixed; pointer-events: none;
       background: var(--surface); color: var(--text);
@@ -10425,6 +10425,8 @@ function createSVG(containerId, width, height) {
   const container = document.getElementById(containerId);
   container.innerHTML = '';
   return d3.select(container).append('svg')
+    .attr('width', width)
+    .attr('height', height)
     .attr('viewBox', '0 0 ' + width + ' ' + height)
     .attr('preserveAspectRatio', 'xMidYMid meet');
 }
