@@ -10431,6 +10431,11 @@ function createSVG(containerId, width, height) {
     .attr('preserveAspectRatio', 'xMidYMid meet');
 }
 
+// Fix SVG url(#id) for Windows file:// protocol
+function svgUrl(id) {
+  return 'url(' + window.location.href.split('#')[0] + '#' + id + ')';
+}
+
 function addGradient(svg, id, color, horizontal) {
   let defs = svg.select('defs');
   if (defs.empty()) defs = svg.append('defs');
@@ -10440,7 +10445,7 @@ function addGradient(svg, id, color, horizontal) {
   const c = d3.color(color);
   grad.append('stop').attr('offset', '0%').attr('stop-color', c.brighter(0.4));
   grad.append('stop').attr('offset', '100%').attr('stop-color', c.darker(0.15));
-  return 'url(#' + id + ')';
+  return svgUrl(id);
 }
 
 function getChartTheme() {
